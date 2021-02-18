@@ -1,4 +1,4 @@
-package service.reserva_servico;
+package service.tipo_servico;
 
 import dao.ReservaServicoDao;
 import etc.exception.invalid_input_exception.InvalidInputException;
@@ -12,7 +12,7 @@ public class ReservaServicoService implements Service<ReservaServico> {
 
     @Override
     public void insert(String[] args) throws InvalidInputException {
-        ReservaServicoValidation validation = new ReservaServicoValidation(args);
+        TipoDeServicoValidation validation = new TipoDeServicoValidation(args);
 
         reservaServicoDao.insert(new ReservaServico(
                 validation.tituloValidation(),
@@ -35,11 +35,11 @@ public class ReservaServicoService implements Service<ReservaServico> {
 
     @Override
     public ReservaServico getItem(String[] args) {
-        return null;
+        return reservaServicoDao.getItem(args);
     }
 
     @Override
     public ArrayList<ReservaServico> getList(String[] args) {
-        return null;
+        return reservaServicoDao.getList(args);
     }
 }

@@ -1,18 +1,19 @@
-package service.reserva_servico;
+package service.tipo_servico;
 
 import etc.Persistence;
 import etc.exception.invalid_input_exception.*;
 import model.Cliente;
+import model.Faxineiro;
 import service.Validation;
 
 import java.util.Date;
 
-public class ReservaServicoValidation extends Validation {
-    private String titulo;
-    private String informacoes;
-    private String valorOferecido;
+public class TipoDeServicoValidation extends Validation {
+    private final String titulo;
+    private final String informacoes;
+    private final String valorOferecido;
 
-    public ReservaServicoValidation(String[] args) {
+    public TipoDeServicoValidation(String[] args) {
         this.titulo = args[0];
         this.informacoes = args[1];
         this.valorOferecido = args[2];
@@ -34,6 +35,13 @@ public class ReservaServicoValidation extends Validation {
             throw new InvalidUserExcepcion();
 
         return (Cliente) Persistence.USUARIO;
+    }
+
+    public Faxineiro faxineiroValidation() throws InvalidUserExcepcion {
+        if (!(Persistence.USUARIO instanceof Faxineiro))
+            throw new InvalidUserExcepcion();
+
+        return (Faxineiro) Persistence.USUARIO;
     }
 
     public double valorOferecidoValidation() throws InvalidPriceException {

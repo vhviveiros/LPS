@@ -1,29 +1,30 @@
 package view;
 
-import controller.ReservaServicoTableModel;
+import controller.InsumoTableModel;
 import etc.MaskFormatters;
 import etc.Persistence;
+import etc.exception.invalid_input_exception.InvalidDateException;
 import etc.exception.invalid_input_exception.InvalidInputException;
-import model.Cliente;
 
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
-import java.util.Date;
 
-public class ReservaServico {
-    private JPanel rootPanel;
+public class FormGerenciaInsumo {
     private JButton btnAdicionar;
     private JButton btnAlterar;
     private JButton btnExcluir;
     private JButton btnCancelar;
     private JTextField edtPesquisar;
     private JButton pesquisarButton;
-    private JTextField edtTitulo;
-    private JTextArea edtInformacoes;
-    private JFormattedTextField ftfPreco;
     private JTable lista;
+    private JTextField edtNome;
+    private JTextField edtQtd;
+    private JTextArea edtDetalhes;
+    private JPanel rootPanel;
+    private JFormattedTextField ftfPreco;
+    private JFormattedTextField ftfValidade;
 
-    public ReservaServico() {
+    public FormGerenciaInsumo() {
         btnCancelar.addActionListener(e -> {
             clearFields();
         });
@@ -35,9 +36,11 @@ public class ReservaServico {
 
     private void insert() {
         try {
-            Persistence.RESERVA_SERVICO_SERVICE.insert(new String[]{
-                    edtTitulo.getText(),
-                    edtInformacoes.getText(),
+            Persistence.INSUMO_SERVICE.insert(new String[]{
+                    edtNome.getText(),
+                    edtDetalhes.getText(),
+                    edtQtd.getText(),
+                    ftfValidade.getText(),
                     ftfPreco.getValue().toString()});
 
             clearFields();
@@ -51,23 +54,29 @@ public class ReservaServico {
     }
 
     private void clearFields() {
-        edtTitulo.setText("");
-        edtInformacoes.setText("");
-        ftfPreco.setValue(0.00);
+        edtNome.setText("");
+        edtQtd.setText("");
+        ftfValidade.setText("");
+        edtDetalhes.setText("");
+        ftfPreco.setText("");
     }
 
     private void createUIComponents() {
-        lista = new JTable(new ReservaServicoTableModel());
+        lista = new JTable(new InsumoTableModel());
         ftfPreco = new JFormattedTextField(MaskFormatters.moneyFormat());
         ftfPreco.setColumns(10);
         ftfPreco.setValue(0.00);
+
+        try {
+            ftfValidade = new JFormattedTextField(MaskFormatters.dataFormat());
+        } catch (InvalidDateException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     public static void main(String[] args) {
-        Persistence.USUARIO = new Cliente("Teste", false, new Date(), 00000000000, 00000000, null);
-
         JFrame frame = new JFrame();
-        frame.setContentPane(new ReservaServico().rootPanel);
+        frame.setContentPane(new FormGerenciaInsumo().rootPanel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);

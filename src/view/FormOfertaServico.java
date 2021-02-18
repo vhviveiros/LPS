@@ -1,30 +1,31 @@
 package view;
 
-import controller.InsumoTableModel;
+import controller.CadastroServicoTableModel;
 import etc.MaskFormatters;
 import etc.Persistence;
-import etc.exception.invalid_input_exception.InvalidDateException;
 import etc.exception.invalid_input_exception.InvalidInputException;
+import model.Faxineiro;
+import model.OfertaServico;
+import model.ReservaServico;
 
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
+import java.util.Date;
 
-public class GerenciaInsumo {
+public class FormOfertaServico {
+    private JPanel rootPanel;
     private JButton btnAdicionar;
     private JButton btnAlterar;
     private JButton btnExcluir;
     private JButton btnCancelar;
     private JTextField edtPesquisar;
     private JButton pesquisarButton;
-    private JTable lista;
-    private JTextField edtNome;
-    private JTextField edtQtd;
-    private JTextArea edtDetalhes;
-    private JPanel rootPanel;
+    private JTextField edtTitulo;
+    private JTextArea edtInformacoes;
     private JFormattedTextField ftfPreco;
-    private JFormattedTextField ftfValidade;
+    private JTable lista;
 
-    public GerenciaInsumo() {
+    public FormOfertaServico() {
         btnCancelar.addActionListener(e -> {
             clearFields();
         });
@@ -36,11 +37,9 @@ public class GerenciaInsumo {
 
     private void insert() {
         try {
-            Persistence.INSUMO_SERVICE.insert(new String[]{
-                    edtNome.getText(),
-                    edtDetalhes.getText(),
-                    edtQtd.getText(),
-                    ftfValidade.getText(),
+            Persistence.<OfertaServico>getTipoDeServicoService().insert(new String[]{
+                    edtTitulo.getText(),
+                    edtInformacoes.getText(),
                     ftfPreco.getValue().toString()});
 
             clearFields();
@@ -54,29 +53,23 @@ public class GerenciaInsumo {
     }
 
     private void clearFields() {
-        edtNome.setText("");
-        edtQtd.setText("");
-        ftfValidade.setText("");
-        edtDetalhes.setText("");
-        ftfPreco.setText("");
+        edtTitulo.setText("");
+        edtInformacoes.setText("");
+        ftfPreco.setValue(0.00);
     }
 
     private void createUIComponents() {
-        lista = new JTable(new InsumoTableModel());
+        lista = new JTable(new CadastroServicoTableModel<OfertaServico>());
         ftfPreco = new JFormattedTextField(MaskFormatters.moneyFormat());
         ftfPreco.setColumns(10);
         ftfPreco.setValue(0.00);
-
-        try {
-            ftfValidade = new JFormattedTextField(MaskFormatters.dataFormat());
-        } catch (InvalidDateException e) {
-            JOptionPane.showMessageDialog(null, e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
-        }
     }
 
     public static void main(String[] args) {
+        Persistence.USUARIO = new Faxineiro("Funcionario", false, new Date(), 00000000000, 00000000, null);
+
         JFrame frame = new JFrame();
-        frame.setContentPane(new GerenciaInsumo().rootPanel);
+        frame.setContentPane(new FormOfertaServico().rootPanel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="view.GerenciaInsumo">
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="view.FormReservaServico">
   <grid id="27dc6" binding="rootPanel" layout-manager="GridLayoutManager" row-count="4" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="8" left="8" bottom="8" right="8"/>
     <constraints>
@@ -20,16 +20,6 @@
         <properties/>
         <border type="none"/>
         <children>
-          <component id="a00f8" class="javax.swing.JLabel">
-            <constraints>
-              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
-            </constraints>
-            <properties>
-              <font size="36"/>
-              <horizontalTextPosition value="0"/>
-              <text value="Gerenciamento de Insumos"/>
-            </properties>
-          </component>
           <grid id="604e2" layout-manager="GridLayoutManager" row-count="1" column-count="4" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
             <margin top="8" left="0" bottom="8" right="0"/>
             <constraints>
@@ -72,6 +62,16 @@
               </component>
             </children>
           </grid>
+          <component id="a00f8" class="javax.swing.JLabel">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <font size="36"/>
+              <horizontalTextPosition value="0"/>
+              <text value="Reserva de Servico"/>
+            </properties>
+          </component>
         </children>
       </grid>
       <grid id="e59e6" layout-manager="GridLayoutManager" row-count="1" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
@@ -115,18 +115,10 @@
               </grid>
             </constraints>
             <properties>
-              <text value="Nome"/>
+              <text value="Título"/>
             </properties>
           </component>
-          <component id="77961" class="javax.swing.JLabel">
-            <constraints>
-              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-            </constraints>
-            <properties>
-              <text value="Quantidade"/>
-            </properties>
-          </component>
-          <component id="9f403" class="javax.swing.JTextField" binding="edtNome">
+          <component id="9f403" class="javax.swing.JTextField" binding="edtTitulo">
             <constraints>
               <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                 <preferred-size width="681" height="30"/>
@@ -134,23 +126,7 @@
             </constraints>
             <properties/>
           </component>
-          <component id="44a48" class="javax.swing.JTextField" binding="edtQtd">
-            <constraints>
-              <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false">
-                <preferred-size width="100" height="30"/>
-              </grid>
-            </constraints>
-            <properties/>
-          </component>
-          <component id="52496" class="javax.swing.JLabel">
-            <constraints>
-              <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-            </constraints>
-            <properties>
-              <text value="Validade"/>
-            </properties>
-          </component>
-          <component id="650b7" class="javax.swing.JTextArea" binding="edtDetalhes">
+          <component id="650b7" class="javax.swing.JTextArea" binding="edtInformacoes">
             <constraints>
               <grid row="3" column="0" row-span="3" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
                 <preferred-size width="681" height="50"/>
@@ -165,7 +141,7 @@
               </grid>
             </constraints>
             <properties>
-              <text value="Detalhes"/>
+              <text value="Informações"/>
             </properties>
           </component>
           <component id="13ef3" class="javax.swing.JLabel">
@@ -173,20 +149,12 @@
               <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <text value="Preço"/>
+              <text value="Valor Oferacido"/>
             </properties>
           </component>
           <component id="40eb3" class="javax.swing.JFormattedTextField" binding="ftfPreco" custom-create="true">
             <constraints>
               <grid row="5" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false">
-                <preferred-size width="100" height="30"/>
-              </grid>
-            </constraints>
-            <properties/>
-          </component>
-          <component id="a9011" class="javax.swing.JFormattedTextField" binding="ftfValidade">
-            <constraints>
-              <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false">
                 <preferred-size width="100" height="30"/>
               </grid>
             </constraints>

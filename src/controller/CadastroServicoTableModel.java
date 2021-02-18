@@ -3,16 +3,17 @@ package controller;
 import etc.Persistence;
 import model.Insumo;
 import model.ReservaServico;
+import model.TipoDeServico;
 
 import javax.swing.table.AbstractTableModel;
 import java.text.SimpleDateFormat;
 
-public class ReservaServicoTableModel extends AbstractTableModel {
-    private final String[] columnNames = {"Nome", "Cliente", "Preço", "Data Reserva"};
+public class CadastroServicoTableModel<T extends TipoDeServico<?>> extends AbstractTableModel {
+    private final String[] columnNames = {"Nome", "Usuário", "Preço", "Data Reserva"};
 
     @Override
     public int getRowCount() {
-        return Persistence.RESERVAS_SERVICOS.count();
+        return Persistence.<T>getTipoDeServicoRepository().count();
     }
 
     @Override
@@ -27,12 +28,12 @@ public class ReservaServicoTableModel extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        ReservaServico reservaServico = Persistence.RESERVAS_SERVICOS.getValueAt(rowIndex);
-        String valorOferecido = "R$ " + String.format("%.2f", reservaServico.getValorOferecido());
+        T reservaServico = Persistence.<T>getTipoDeServicoRepository().getValueAt(rowIndex);
+        String valorOferecido = "R$ " + String.format("%.2f", reservaServico.getPreco());
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        String date = simpleDateFormat.format(reservaServico.getDataReserva());
+        String date = simpleDateFormat.format(reservaServico.getDataCriacao());
 
-        var result = new Object[]{reservaServico.getTitulo(), reservaServico.getCliente(),
+        var result = new Object[]{reservaServico.getTitulo(), reservaServico.getUsuario(),
                 valorOferecido, date};
         return result[columnIndex];
     }

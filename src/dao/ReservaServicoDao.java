@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class ReservaServicoDao implements Dao<ReservaServico> {
     @Override
     public void insert(ReservaServico reserva) {
-        Persistence.RESERVAS_SERVICOS.addItem(reserva);
+        Persistence.<ReservaServico>getTipoDeServicoRepository().addItem(reserva);
     }
 
     @Override
@@ -28,6 +28,6 @@ public class ReservaServicoDao implements Dao<ReservaServico> {
 
     @Override
     public ArrayList<ReservaServico> getList(String[] args) {
-        return Persistence.RESERVAS_SERVICOS.retrieveData();
+        return Persistence.<ReservaServico>getTipoDeServicoRepository().retrieveData();
     }
 }
