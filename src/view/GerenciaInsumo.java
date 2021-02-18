@@ -3,6 +3,7 @@ package view;
 import controller.InsumoTableModel;
 import etc.MaskFormatters;
 import etc.Persistence;
+import etc.exception.invalid_input_exception.InvalidDateException;
 import etc.exception.invalid_input_exception.InvalidInputException;
 
 import javax.swing.*;
@@ -18,10 +19,10 @@ public class GerenciaInsumo {
     private JTable lista;
     private JTextField edtNome;
     private JTextField edtQtd;
-    private JTextField edtValidade;
     private JTextArea edtDetalhes;
     private JPanel rootPanel;
     private JFormattedTextField ftfPreco;
+    private JFormattedTextField ftfValidade;
 
     public GerenciaInsumo() {
         btnCancelar.addActionListener(e -> {
@@ -39,7 +40,7 @@ public class GerenciaInsumo {
                     edtNome.getText(),
                     edtDetalhes.getText(),
                     edtQtd.getText(),
-                    edtValidade.getText(),
+                    ftfValidade.getText(),
                     ftfPreco.getValue().toString()});
 
             clearFields();
@@ -55,7 +56,7 @@ public class GerenciaInsumo {
     private void clearFields() {
         edtNome.setText("");
         edtQtd.setText("");
-        edtValidade.setText("");
+        ftfValidade.setText("");
         edtDetalhes.setText("");
         ftfPreco.setText("");
     }
@@ -65,10 +66,16 @@ public class GerenciaInsumo {
         ftfPreco = new JFormattedTextField(MaskFormatters.moneyFormat());
         ftfPreco.setColumns(10);
         ftfPreco.setValue(0.00);
+
+        try {
+            ftfValidade = new JFormattedTextField(MaskFormatters.dataFormat());
+        } catch (InvalidDateException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     public static void main(String[] args) {
-        JFrame frame = new JFrame ();
+        JFrame frame = new JFrame();
         frame.setContentPane(new GerenciaInsumo().rootPanel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();

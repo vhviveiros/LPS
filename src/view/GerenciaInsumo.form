@@ -150,14 +150,6 @@
               <text value="Validade"/>
             </properties>
           </component>
-          <component id="17d76" class="javax.swing.JTextField" binding="edtValidade">
-            <constraints>
-              <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false">
-                <preferred-size width="100" height="30"/>
-              </grid>
-            </constraints>
-            <properties/>
-          </component>
           <component id="650b7" class="javax.swing.JTextArea" binding="edtDetalhes">
             <constraints>
               <grid row="3" column="0" row-span="3" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
@@ -187,6 +179,14 @@
           <component id="40eb3" class="javax.swing.JFormattedTextField" binding="ftfPreco" custom-create="true">
             <constraints>
               <grid row="5" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false">
+                <preferred-size width="100" height="30"/>
+              </grid>
+            </constraints>
+            <properties/>
+          </component>
+          <component id="a9011" class="javax.swing.JFormattedTextField" binding="ftfValidade" custom-create="true">
+            <constraints>
+              <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false">
                 <preferred-size width="100" height="30"/>
               </grid>
             </constraints>

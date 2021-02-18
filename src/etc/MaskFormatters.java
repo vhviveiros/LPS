@@ -1,5 +1,7 @@
 package etc;
 
+import etc.exception.invalid_input_exception.InvalidDateException;
+
 import javax.swing.text.MaskFormatter;
 import javax.swing.text.NumberFormatter;
 import java.text.NumberFormat;
@@ -26,7 +28,11 @@ public class MaskFormatters {
         return new MaskFormatter("###.###.###-##");
     }
 
-    public static MaskFormatter dataFormat() throws ParseException {
-        return new MaskFormatter("##/##/####");
+    public static MaskFormatter dataFormat() throws InvalidDateException {
+        try {
+            return new MaskFormatter("##/##/####");
+        } catch (ParseException e) {
+            throw new InvalidDateException();
+        }
     }
 }

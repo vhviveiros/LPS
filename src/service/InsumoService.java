@@ -1,27 +1,25 @@
 package service;
 
 import dao.InsumoDAO;
-import etc.exception.invalid_input_exception.InvalidNameInputException;
-import etc.exception.invalid_input_exception.InvalidQuantityException;
+import etc.exception.invalid_input_exception.InvalidInputException;
 import model.Insumo;
 import model.Model;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 public class InsumoService implements Service {
     private InsumoDAO insumoDAO = new InsumoDAO();
 
     @Override
-    public void insert(String[] args) throws InvalidNameInputException, InvalidQuantityException {
+    public void insert(String[] args) throws InvalidInputException {
         InsumoValidation validation = new InsumoValidation(args);
 
         insumoDAO.insert(new Insumo(
                 validation.nomeInsumoValidation(),
                 validation.detalhesValidation(),
                 validation.quantidadeValidation(),
-                new Date(),
-                Double.parseDouble(args[4])));
+                validation.validadeValidation(),
+                validation.precoValidation()));
     }
 
     @Override

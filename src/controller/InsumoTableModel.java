@@ -26,7 +26,8 @@ public class InsumoTableModel extends AbstractTableModel {
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         Insumo insumo = Persistence.INSUMOS.getValueAt(rowIndex);
-        var result = new Object[]{insumo.getNome(), insumo.getQuantidade(), insumo.getValidade(), insumo.getPreco()};
+        var result = new Object[]{insumo.getNome(), insumo.getQuantidade(), insumo.getValidade(),
+                "R$ " + String.format("%.2f", insumo.getPreco())};
         return result[columnIndex];
     }
 }
