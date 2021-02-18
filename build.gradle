@@ -1,0 +1,21 @@
+plugins {
+    id 'java'
+}
+
+group 'org.vhviveiros'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+sourceSets {
+    main {
+        java {
+            srcDirs = ['src']
+        }
+    }
+}
+dependencies {
+    testCompile "org.mockito:mockito-core:2.+"
+    implementation "io.reactivex.rxjava3:rxjava:3.0.11-RC3"
+}
