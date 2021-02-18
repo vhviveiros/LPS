@@ -28,7 +28,7 @@ public class InsumoDAO implements Dao<Insumo> {
 
     @Override
     public ArrayList<Insumo> getList(String[] args) {
-        return null;
+        return Persistence.INSUMOS.retrieveData();
     }
 
 }

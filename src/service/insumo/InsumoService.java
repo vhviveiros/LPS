@@ -1,9 +1,10 @@
-package service;
+package service.insumo;
 
 import dao.InsumoDAO;
 import etc.exception.invalid_input_exception.InvalidInputException;
 import model.Insumo;
 import model.Model;
+import service.Service;
 
 import java.util.ArrayList;
 

@@ -4,6 +4,7 @@ import etc.Persistence;
 import model.Insumo;
 
 import javax.swing.table.AbstractTableModel;
+import java.text.SimpleDateFormat;
 
 public class InsumoTableModel extends AbstractTableModel {
     private final String[] columnNames = {"Nome", "Quantidade", "Validade", "Preço"};
@@ -26,8 +27,11 @@ public class InsumoTableModel extends AbstractTableModel {
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         Insumo insumo = Persistence.INSUMOS.getValueAt(rowIndex);
-        var result = new Object[]{insumo.getNome(), insumo.getQuantidade(), insumo.getValidade(),
-                "R$ " + String.format("%.2f", insumo.getPreco())};
+        String preco = "R$ " + String.format("%.2f", insumo.getPreco());
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        String data = simpleDateFormat.format(insumo.getValidade());
+
+        var result = new Object[]{insumo.getNome(), insumo.getQuantidade(), data, preco};
         return result[columnIndex];
     }
 }
