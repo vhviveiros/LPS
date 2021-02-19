@@ -2,7 +2,7 @@ package view;
 
 import controller.InsumoTableModel;
 import etc.MaskFormatters;
-import etc.Persistence;
+import repository.Persistence;
 import etc.exception.invalid_input_exception.InvalidDateException;
 import etc.exception.invalid_input_exception.InvalidInputException;
 
@@ -56,9 +56,9 @@ public class FormGerenciaInsumo {
     private void clearFields() {
         edtNome.setText("");
         edtQtd.setText("");
-        ftfValidade.setText("");
+        ftfValidade.setValue("");
         edtDetalhes.setText("");
-        ftfPreco.setText("");
+        ftfPreco.setValue(0.00);
     }
 
     private void createUIComponents() {
@@ -68,7 +68,7 @@ public class FormGerenciaInsumo {
         ftfPreco.setValue(0.00);
 
         try {
-            ftfValidade = new JFormattedTextField(MaskFormatters.dataFormat());
+            ftfValidade = new JFormattedTextField(MaskFormatters.dateFormat());
         } catch (InvalidDateException e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }

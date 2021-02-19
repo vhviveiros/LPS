@@ -7,6 +7,9 @@ public class Endereco extends Model{
     private String estado;
     private String bairro;
 
+    public static final String[] ESTADOS = new String[] {"AC", "AL", "AP", "AM", "BA", "CE", "ES","GO", "MA", "MT", "MS", "MG",
+            "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO", "DF"};
+
     public Endereco(String logradouro, int numero, String cidade, String estado, String bairro) {
         this.logradouro = logradouro;
         this.numero = numero;

@@ -1,17 +1,13 @@
 package service.insumo;
 
-import etc.Persistence;
+import repository.Persistence;
 import etc.exception.invalid_input_exception.InvalidDateException;
 import etc.exception.invalid_input_exception.InvalidNameInputException;
 import etc.exception.invalid_input_exception.InvalidPriceException;
 import etc.exception.invalid_input_exception.InvalidQuantityException;
 import service.Validation;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class InsumoValidation extends Validation {
     private final String nome;

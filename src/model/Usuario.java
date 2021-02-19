@@ -6,11 +6,11 @@ public class Usuario extends Model{
     private String nome;
     private boolean sexo;
     private Date nascimento;
-    private int cpf;
-    private int identidade;
+    private long cpf;
+    private long identidade;
     private Endereco endereco;
 
-    public Usuario(String nome, boolean sexo, Date nascimento, int cpf, int identidade, Endereco endereco) {
+    public Usuario(String nome, boolean sexo, Date nascimento, long cpf, long identidade, Endereco endereco) {
         this.nome = nome;
         this.sexo = sexo;
         this.nascimento = nascimento;
@@ -43,19 +43,19 @@ public class Usuario extends Model{
         this.nascimento = nascimento;
     }
 
-    public int getCpf() {
+    public long getCpf() {
         return cpf;
     }
 
-    public void setCpf(int cpf) {
+    public void setCpf(long cpf) {
         this.cpf = cpf;
     }
 
-    public int getIdentidade() {
+    public long getIdentidade() {
         return identidade;
     }
 
-    public void setIdentidade(int identidade) {
+    public void setIdentidade(long identidade) {
         this.identidade = identidade;
     }
 

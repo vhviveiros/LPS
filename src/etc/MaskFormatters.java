@@ -1,6 +1,8 @@
 package etc;
 
+import etc.exception.invalid_input_exception.InvalidCpfInputException;
 import etc.exception.invalid_input_exception.InvalidDateException;
+import etc.exception.invalid_input_exception.InvalididentityException;
 
 import javax.swing.text.MaskFormatter;
 import javax.swing.text.NumberFormatter;
@@ -24,11 +26,23 @@ public class MaskFormatters {
         return formatter;
     }
 
-    public static MaskFormatter cpfFormat() throws ParseException {
-        return new MaskFormatter("###.###.###-##");
+    public static MaskFormatter cpfFormat() throws InvalidCpfInputException {
+        try {
+            return new MaskFormatter("###.###.###-##");
+        } catch (ParseException e) {
+            throw new InvalidCpfInputException();
+        }
     }
 
-    public static MaskFormatter dataFormat() throws InvalidDateException {
+    public static MaskFormatter identidadeFormat() throws InvalididentityException {
+        try {
+            return new MaskFormatter("##.###.###");
+        } catch (ParseException e) {
+            throw new InvalididentityException();
+        }
+    }
+
+    public static MaskFormatter dateFormat() throws InvalidDateException {
         try {
             return new MaskFormatter("##/##/####");
         } catch (ParseException e) {

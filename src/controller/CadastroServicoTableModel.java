@@ -1,8 +1,6 @@
 package controller;
 
-import etc.Persistence;
-import model.Insumo;
-import model.ReservaServico;
+import repository.Persistence;
 import model.TipoDeServico;
 
 import javax.swing.table.AbstractTableModel;
@@ -13,7 +11,7 @@ public class CadastroServicoTableModel<T extends TipoDeServico<?>> extends Abstr
 
     @Override
     public int getRowCount() {
-        return Persistence.<T>getTipoDeServicoRepository().count();
+        return Persistence.<T>getTipoDeServicoService().getList(null).size();
     }
 
     @Override
@@ -28,7 +26,7 @@ public class CadastroServicoTableModel<T extends TipoDeServico<?>> extends Abstr
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        T reservaServico = Persistence.<T>getTipoDeServicoRepository().getValueAt(rowIndex);
+        T reservaServico = Persistence.<T>getTipoDeServicoService().getList(null).get(rowIndex);
         String valorOferecido = "R$ " + String.format("%.2f", reservaServico.getPreco());
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
         String date = simpleDateFormat.format(reservaServico.getDataCriacao());

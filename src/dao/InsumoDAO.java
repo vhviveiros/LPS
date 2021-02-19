@@ -1,6 +1,6 @@
 package dao;
 
-import etc.Persistence;
+import repository.Persistence;
 import model.Insumo;
 
 import java.util.ArrayList;

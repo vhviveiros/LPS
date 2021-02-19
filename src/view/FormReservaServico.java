@@ -2,7 +2,7 @@ package view;
 
 import controller.CadastroServicoTableModel;
 import etc.MaskFormatters;
-import etc.Persistence;
+import repository.Persistence;
 import etc.exception.invalid_input_exception.InvalidInputException;
 import model.Cliente;
 import model.ReservaServico;
@@ -65,7 +65,7 @@ public class FormReservaServico {
     }
 
     public static void main(String[] args) {
-        Persistence.USUARIO = new Cliente("Cliente", false, new Date(), 00000000000, 00000000, null);
+        Persistence.usuario = new Cliente("Cliente", false, new Date(), 00000000000, 00000000, null);
 
         JFrame frame = new JFrame();
         frame.setContentPane(new FormReservaServico().rootPanel);

@@ -1,14 +1,14 @@
 package service.insumo;
 
 import dao.InsumoDAO;
+import repository.Persistence;
 import etc.exception.invalid_input_exception.InvalidInputException;
 import model.Insumo;
-import model.Model;
 import service.Service;
 
 import java.util.ArrayList;
 
-public class InsumoService implements Service {
+public class InsumoService implements Service<Insumo> {
     private InsumoDAO insumoDAO = new InsumoDAO();
 
     @Override
@@ -34,12 +34,12 @@ public class InsumoService implements Service {
     }
 
     @Override
-    public Model getItem(String[] args) {
+    public Insumo getItem(String[] args) {
         return insumoDAO.getItem(args);
     }
 
     @Override
-    public ArrayList getList(String[] args) {
-        return null;
+    public ArrayList<Insumo> getList(String[] args) {
+        return Persistence.INSUMOS.retrieveData();
     }
 }

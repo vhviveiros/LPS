@@ -5,19 +5,19 @@ public abstract class InvalidPlaceException extends InvalidInputException{
         super(message);
     }
 
-    public class LongNameException extends InvalidPlaceException {
+    public static class LongNameException extends InvalidPlaceException {
         public LongNameException() {
             super("O nome do logradouro informado é muito longo!");
         }
     }
 
-    public class ShortNameException extends InvalidPlaceException {
+    public static class ShortNameException extends InvalidPlaceException {
         public ShortNameException() {
             super("O nome do logradouro informado é muito curto!");
         }
     }
 
-    public class InvalidCharactersException extends InvalidPlaceException {
+    public static class InvalidCharactersException extends InvalidPlaceException {
         public InvalidCharactersException() {
             super("O nome do logradouro informado possui caracteres inválidos! Utilize apenas letras de 'a' a 'z' e números. Além disso, o " +
                     "primeiro caractere de cada palavra deve ser maiúsculo!");

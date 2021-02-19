@@ -1,8 +1,7 @@
 package dao;
 
-import etc.Persistence;
+import repository.Persistence;
 import model.OfertaServico;
-import model.ReservaServico;
 
 import java.util.ArrayList;
 

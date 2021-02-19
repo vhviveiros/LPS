@@ -1,6 +1,6 @@
 package dao;
 
-import etc.Persistence;
+import repository.Persistence;
 import model.ReservaServico;
 
 import java.util.ArrayList;

@@ -1,6 +1,6 @@
 package service.tipo_servico;
 
-import etc.Persistence;
+import repository.Persistence;
 import etc.exception.invalid_input_exception.*;
 import model.Cliente;
 import model.Faxineiro;
@@ -31,17 +31,17 @@ public class TipoDeServicoValidation extends Validation {
     }
 
     public Cliente clienteValidation() throws InvalidUserExcepcion {
-        if (!(Persistence.USUARIO instanceof Cliente))
+        if (!(Persistence.usuario instanceof Cliente))
             throw new InvalidUserExcepcion();
 
-        return (Cliente) Persistence.USUARIO;
+        return (Cliente) Persistence.usuario;
     }
 
     public Faxineiro faxineiroValidation() throws InvalidUserExcepcion {
-        if (!(Persistence.USUARIO instanceof Faxineiro))
+        if (!(Persistence.usuario instanceof Faxineiro))
             throw new InvalidUserExcepcion();
 
-        return (Faxineiro) Persistence.USUARIO;
+        return (Faxineiro) Persistence.usuario;
     }
 
     public double valorOferecidoValidation() throws InvalidPriceException {

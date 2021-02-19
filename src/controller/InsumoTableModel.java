@@ -1,6 +1,6 @@
 package controller;
 
-import etc.Persistence;
+import repository.Persistence;
 import model.Insumo;
 
 import javax.swing.table.AbstractTableModel;
@@ -11,7 +11,7 @@ public class InsumoTableModel extends AbstractTableModel {
 
     @Override
     public int getRowCount() {
-        return Persistence.INSUMOS.count();
+        return Persistence.INSUMO_SERVICE.getList(null).size();
     }
 
     @Override
@@ -26,7 +26,7 @@ public class InsumoTableModel extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        Insumo insumo = Persistence.INSUMOS.getValueAt(rowIndex);
+        Insumo insumo = Persistence.INSUMO_SERVICE.getList(null).get(rowIndex);
         String preco = "R$ " + String.format("%.2f", insumo.getPreco());
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
         String data = simpleDateFormat.format(insumo.getValidade());

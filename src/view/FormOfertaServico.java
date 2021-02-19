@@ -2,11 +2,10 @@ package view;
 
 import controller.CadastroServicoTableModel;
 import etc.MaskFormatters;
-import etc.Persistence;
+import repository.Persistence;
 import etc.exception.invalid_input_exception.InvalidInputException;
 import model.Faxineiro;
 import model.OfertaServico;
-import model.ReservaServico;
 
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
@@ -66,7 +65,7 @@ public class FormOfertaServico {
     }
 
     public static void main(String[] args) {
-        Persistence.USUARIO = new Faxineiro("Funcionario", false, new Date(), 00000000000, 00000000, null);
+        Persistence.usuario = new Faxineiro("Funcionario", false, new Date(), 00000000000, 00000000, null);
 
         JFrame frame = new JFrame();
         frame.setContentPane(new FormOfertaServico().rootPanel);
