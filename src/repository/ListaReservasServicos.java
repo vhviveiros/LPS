@@ -1,10 +1,10 @@
 package repository;
 
-import model.ReservaServico;
+import model.Booking;
 
-public class ListaReservasServicos extends Repository<ReservaServico> {
+public class ListaReservasServicos extends Repository<Booking> {
     @Override
-    public ReservaServico findItem(String[] args) {
+    public Booking findItem(String[] args) {
         return null;
     }
 }

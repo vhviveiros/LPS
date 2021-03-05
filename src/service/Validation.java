@@ -13,12 +13,12 @@ import java.util.regex.Pattern;
 public abstract class Validation {
     protected double priceValidation(String price) throws InvalidPriceException {
         try {
-            double preco = Double.parseDouble(price);
+            double priceDouble = Double.parseDouble(price);
 
-            if (preco < 0)
+            if (priceDouble < 0)
                 throw new InvalidPriceException();
 
-            return preco;
+            return priceDouble;
         } catch (NumberFormatException e) {
             throw new InvalidPriceException();
         }
@@ -26,10 +26,10 @@ public abstract class Validation {
 
     protected Date nextDateValidation(String date) throws InvalidDateException {
         try {
-            String[] validadeSplit = date.split("/");
-            int dd = Integer.parseInt(validadeSplit[0]);
-            int mm = Integer.parseInt(validadeSplit[1]);
-            int yy = Integer.parseInt(validadeSplit[2]);
+            String[] dateSplit = date.split("/");
+            int dd = Integer.parseInt(dateSplit[0]);
+            int mm = Integer.parseInt(dateSplit[1]);
+            int yy = Integer.parseInt(dateSplit[2]);
 
             if (dd > 31 || dd < 1 || mm > 12 || mm < 1 || yy < 2021) //a data 02/18/2021 estava sendo aceita
                 throw new InvalidDateException();

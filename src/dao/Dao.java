@@ -1,6 +1,5 @@
 package dao;
 
-import model.Insumo;
 import model.Model;
 
 import java.util.ArrayList;

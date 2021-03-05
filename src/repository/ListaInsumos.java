@@ -1,14 +1,14 @@
 package repository;
 
-import model.Insumo;
+import model.Supply;
 
 import java.util.NoSuchElementException;
 
-public class ListaInsumos extends Repository<Insumo> {
+public class ListaInsumos extends Repository<Supply> {
     @Override
-    public Insumo findItem(String[] args) {
+    public Supply findItem(String[] args) {
         try {
-            return data.stream().filter(insumo -> insumo.getNome().equals(args[0])).findFirst().get();
+            return data.stream().filter(insumo -> insumo.getName().equals(args[0])).findFirst().get();
         } catch (NoSuchElementException e) {
             return null;
         }
