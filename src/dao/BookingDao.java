@@ -13,12 +13,13 @@ public class BookingDao implements Dao<Booking> {
     @Override
     public void insert(Booking booking) throws SQLException {
         PreparedStatement ps = Persistence.CONNECTION.getConnection().prepareStatement(
-                "INSERT INTO tbl_booking (title,details,price,date) values (?,?,?,?)");
+                "INSERT INTO tbl_booking (title,details,price,date,client_id) values (?,?,?,?,?)");
 
         ps.setString(1, booking.getTitle());
         ps.setString(2, booking.getDetails());
         ps.setFloat(3, (float) booking.getPrice());
         ps.setDate(4, new Date(booking.getDate().getTime()));
+        ps.setInt(5, Persistence.user.getId());
 
         ps.executeUpdate();
     }

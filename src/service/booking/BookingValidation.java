@@ -12,11 +12,13 @@ public class BookingValidation extends Validation {
     private final String title;
     private final String details;
     private final String price;
+    private final String date;
 
     public BookingValidation(String[] args) {
         this.title = args[0];
         this.details = args[1];
         this.price = args[2];
+        this.date = args[3];
     }
 
     public String titleValidation() throws InvalidNameInputException {
@@ -41,8 +43,7 @@ public class BookingValidation extends Validation {
         return super.priceValidation(this.price);
     }
 
-    //TODO:date must be input
-    public Date dateValidation() {
-        return new Date();
+    public Date dateValidation() throws InvalidDateException {
+        return super.nextDateValidation(date);
     }
 }

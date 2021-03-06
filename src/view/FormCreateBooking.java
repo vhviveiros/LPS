@@ -2,6 +2,7 @@ package view;
 
 import controller.BookingRegisterTableModel;
 import etc.MaskFormatters;
+import etc.exception.invalid_input_exception.InvalidDateException;
 import service.Persistence;
 import etc.exception.invalid_input_exception.InvalidInputException;
 import model.Client;
@@ -25,6 +26,7 @@ public class FormCreateBooking {
     private JTextArea edtDetails;
     private JFormattedTextField ftfPrice;
     private JTable jtList;
+    private JFormattedTextField ftfDate;
 
     public FormCreateBooking() {
         btnCancel.addActionListener(e -> {
@@ -41,7 +43,8 @@ public class FormCreateBooking {
             Persistence.BOOKING_SERVICE.insert(new String[]{
                     edtTitle.getText(),
                     edtDetails.getText(),
-                    ftfPrice.getValue().toString()});
+                    ftfPrice.getValue().toString(),
+                    ftfDate.getText()});
             clearFields();
             updateTable();
         } catch (InvalidInputException e) {
@@ -51,12 +54,11 @@ public class FormCreateBooking {
         }
     }
 
-
-
     private void updateTable() {
         try {
             Persistence.BOOKING_SERVICE.updateData(new String[]{String.valueOf(Persistence.user.getId())});
-            ((AbstractTableModel) jtList.getModel()).fireTableDataChanged();
+            if (jtList != null)
+                ((AbstractTableModel) jtList.getModel()).fireTableDataChanged();
         } catch (SQLException throwables) {
             showErrorDialog("Sql error!");
         }
@@ -66,18 +68,26 @@ public class FormCreateBooking {
         edtTitle.setText("");
         edtDetails.setText("");
         ftfPrice.setValue(0.00);
+        ftfDate.setValue("");
     }
 
     private void createUIComponents() {
+        updateTable();
         jtList = new JTable(new BookingRegisterTableModel());
         ftfPrice = new JFormattedTextField(MaskFormatters.moneyFormat());
         ftfPrice.setColumns(10);
         ftfPrice.setValue(0.00);
-        updateTable();
+
+        try {
+            ftfDate = new JFormattedTextField(MaskFormatters.dateFormat());
+        } catch (InvalidDateException e) {
+            e.printStackTrace();
+            showErrorDialog(e.getMessage());
+        }
     }
 
     public static void main(String[] args) {
-        Persistence.user = new Client("Cliente", true, new Date(), 00000000000, 00000000, null, null);
+        Persistence.user = new Client(19, "teste", true, new Date(), 00000000000, 00000000, null, null);
 
         JFrame frame = new JFrame();
         frame.setContentPane(new FormCreateBooking().rootPanel);

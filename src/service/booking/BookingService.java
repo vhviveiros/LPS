@@ -10,7 +10,6 @@ import java.util.ArrayList;
 
 public class BookingService extends Service<Booking> {
     private final BookingDao bookingDao = new BookingDao();
-    private ArrayList<Booking> clientBookings;
 
     @Override
     public void insert(String[] args) throws InvalidInputException, SQLException {
@@ -42,6 +41,6 @@ public class BookingService extends Service<Booking> {
 
     @Override
     public void updateData(String[] args) throws SQLException {
-        clientBookings = bookingDao.getList(args);
+        data = bookingDao.getList(args);
     }
 }

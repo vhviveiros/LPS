@@ -10,6 +10,8 @@ import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
 import java.sql.SQLException;
 
+import static view.Tools.showErrorDialog;
+
 public class FormSupplyManagement {
     private JButton btnAdd;
     private JButton btnAlter;
@@ -71,7 +73,7 @@ public class FormSupplyManagement {
         try {
             ftfExpirationDate = new JFormattedTextField(MaskFormatters.dateFormat());
         } catch (InvalidDateException e) {
-            JOptionPane.showMessageDialog(null, e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+            showErrorDialog(e.getMessage());
         }
     }
 
