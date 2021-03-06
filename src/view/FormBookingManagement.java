@@ -14,7 +14,7 @@ import java.util.Date;
 
 import static view.Tools.showErrorDialog;
 
-public class FormCreateBooking {
+public class FormBookingManagement {
     private JPanel rootPanel;
     private JButton btnAdd;
     private JButton btnAlter;
@@ -28,7 +28,7 @@ public class FormCreateBooking {
     private JTable jtList;
     private JFormattedTextField ftfDate;
 
-    public FormCreateBooking() {
+    public FormBookingManagement() {
         btnCancel.addActionListener(e -> {
             clearFields();
         });
@@ -56,7 +56,7 @@ public class FormCreateBooking {
 
     private void updateTable() {
         try {
-            Persistence.BOOKING_SERVICE.updateData(new String[]{String.valueOf(Persistence.user.getId())});
+            Persistence.BOOKING_SERVICE.updateData(new String[]{String.valueOf(Persistence.currentUser.getId())});
             if (jtList != null)
                 ((AbstractTableModel) jtList.getModel()).fireTableDataChanged();
         } catch (SQLException throwables) {
@@ -87,10 +87,10 @@ public class FormCreateBooking {
     }
 
     public static void main(String[] args) {
-        Persistence.user = new Client(19, "teste", true, new Date(), 00000000000, 00000000, null, null);
+        Persistence.currentUser = new Client(19, "teste", true, new Date(), 00000000000, 00000000, null, null);
 
         JFrame frame = new JFrame();
-        frame.setContentPane(new FormCreateBooking().rootPanel);
+        frame.setContentPane(new FormBookingManagement().rootPanel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);

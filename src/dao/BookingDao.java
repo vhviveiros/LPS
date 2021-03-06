@@ -19,7 +19,7 @@ public class BookingDao implements Dao<Booking> {
         ps.setString(2, booking.getDetails());
         ps.setFloat(3, (float) booking.getPrice());
         ps.setDate(4, new Date(booking.getDate().getTime()));
-        ps.setInt(5, Persistence.user.getId());
+        ps.setInt(5, Persistence.currentUser.getId());
 
         ps.executeUpdate();
     }

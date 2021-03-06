@@ -1,6 +1,5 @@
 package dao;
 
-import model.Booking;
 import service.Persistence;
 import model.Supply;
 
@@ -20,7 +19,7 @@ public class SupplyDAO implements Dao<Supply> {
         ps.setFloat(3, (float) supply.getAmount());
         ps.setDate(4, new java.sql.Date(supply.getExpirationDate().getTime()));
         ps.setFloat(5, (float) supply.getPrice());
-        ps.setInt(6, Persistence.user.getId());
+        ps.setInt(6, Persistence.currentUser.getId());
 
         ps.executeUpdate();
     }

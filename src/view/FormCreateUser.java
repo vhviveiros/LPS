@@ -81,9 +81,9 @@ public class FormCreateUser {
             else
                 Persistence.CLEANER_SERVICE.insert(userFields);
 
-            var address = Persistence.user.getAddress();
+            var address = Persistence.currentUser.getAddress();
             Persistence.CLIENT_SERVICE.updateData(new String[]{userFields[2], userFields[3]});
-            Persistence.user.setAddress(address);
+            Persistence.currentUser.setAddress(address);
 
             clearFields();
             SwingUtilities.getWindowAncestor(rootPanel).dispose();
@@ -111,7 +111,7 @@ public class FormCreateUser {
     }
 
     public static void main(String[] args) {
-        Persistence.user = new Client("Cliente", true, new Date(), 00000000000, 00000000, null,
+        Persistence.currentUser = new Client("Cliente", true, new Date(), 00000000000, 00000000, null,
                 new Credentials(1, "teste", "teste"));
 
         JFrame frame = new JFrame();

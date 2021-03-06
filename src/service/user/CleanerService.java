@@ -23,8 +23,8 @@ public class CleanerService extends Service<Cleaner> {
                 validation.birthDateValidation(),
                 validation.cpfValidation(),
                 validation.identityValidation(),
-                Persistence.user.getAddress(),
-                Persistence.user.getCredentials()));
+                Persistence.currentUser.getAddress(),
+                Persistence.currentUser.getCredentials()));
     }
 
     @Override

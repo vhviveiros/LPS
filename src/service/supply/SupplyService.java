@@ -39,6 +39,6 @@ public class SupplyService extends Service<Supply> {
 
     @Override
     public void updateData(String[] args) throws SQLException {
-        supplyDAO.getList(args);
+        data = supplyDAO.getList(args);
     }
 }

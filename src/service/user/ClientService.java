@@ -23,8 +23,8 @@ public class ClientService extends Service<Client> {
                 validation.birthDateValidation(),
                 validation.cpfValidation(),
                 validation.identityValidation(),
-                Persistence.user.getAddress(),
-                Persistence.user.getCredentials()));
+                Persistence.currentUser.getAddress(),
+                Persistence.currentUser.getCredentials()));
     }
 
     @Override
@@ -44,6 +44,6 @@ public class ClientService extends Service<Client> {
 
     @Override
     public void updateData(String[] args) throws SQLException {
-        Persistence.user = clientDao.getItem(args);
+        Persistence.currentUser = clientDao.getItem(args);
     }
 }

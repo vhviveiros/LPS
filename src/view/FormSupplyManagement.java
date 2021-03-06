@@ -2,6 +2,7 @@ package view;
 
 import controller.SupplyTableModel;
 import etc.MaskFormatters;
+import model.Cleaner;
 import service.Persistence;
 import etc.exception.invalid_input_exception.InvalidDateException;
 import etc.exception.invalid_input_exception.InvalidInputException;
@@ -9,6 +10,7 @@ import etc.exception.invalid_input_exception.InvalidInputException;
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
 import java.sql.SQLException;
+import java.util.Date;
 
 import static view.Tools.showErrorDialog;
 
@@ -47,6 +49,9 @@ public class FormSupplyManagement {
                     ftfPrice.getValue().toString()});
 
             clearFields();
+
+            Persistence.SUPPLY_SERVICE.updateData(new String[]{String.valueOf(Persistence.currentUser.getId())});
+
             ((AbstractTableModel) jtList.getModel()).fireTableDataChanged();
         } catch (InvalidInputException | SQLException e) {
             JOptionPane.showMessageDialog(
@@ -65,19 +70,24 @@ public class FormSupplyManagement {
     }
 
     private void createUIComponents() {
-        jtList = new JTable(new SupplyTableModel());
-        ftfPrice = new JFormattedTextField(MaskFormatters.moneyFormat());
-        ftfPrice.setColumns(10);
-        ftfPrice.setValue(0.00);
-
         try {
+            Persistence.SUPPLY_SERVICE.updateData(new String[]{String.valueOf(Persistence.currentUser.getId())});
+
+            jtList = new JTable(new SupplyTableModel());
+            ftfPrice = new JFormattedTextField(MaskFormatters.moneyFormat());
+            ftfPrice.setColumns(10);
+            ftfPrice.setValue(0.00);
+
             ftfExpirationDate = new JFormattedTextField(MaskFormatters.dateFormat());
-        } catch (InvalidDateException e) {
+        } catch (InvalidDateException | SQLException e) {
+            e.printStackTrace();
             showErrorDialog(e.getMessage());
         }
     }
 
     public static void main(String[] args) {
+        Persistence.currentUser = new Cleaner(19, "teste", true, new Date(), 00000000000, 00000000, null, null);
+
         JFrame frame = new JFrame();
         frame.setContentPane(new FormSupplyManagement().rootPanel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

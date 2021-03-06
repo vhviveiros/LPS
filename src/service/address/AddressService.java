@@ -14,8 +14,8 @@ public class AddressService extends Service<Address> {
 
     @Override
     public void insert(String[] args) throws InvalidInputException, SQLException {
-        Persistence.user = new Client(null, false, null, 00000000000, 00000000, null,
-                Persistence.user.getCredentials());
+        Persistence.currentUser = new Client(null, false, null, 00000000000, 00000000, null,
+                Persistence.currentUser.getCredentials());
 
         AddressValidation validation = new AddressValidation(args);
 
@@ -44,6 +44,6 @@ public class AddressService extends Service<Address> {
 
     @Override
     public void updateData(String[] args) throws SQLException {
-        Persistence.user.setAddress(addressDao.getItem(args));
+        Persistence.currentUser.setAddress(addressDao.getItem(args));
     }
 }

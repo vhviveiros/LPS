@@ -26,7 +26,7 @@ public class AddressDao implements Dao<Address> {
 
     @Override
     public void remove(Address model) {
-        Persistence.user.setAddress(null);
+        Persistence.currentUser.setAddress(null);
     }
 
     @Override
