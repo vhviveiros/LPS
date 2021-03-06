@@ -3,6 +3,7 @@ package service.user;
 import dao.CleanerDao;
 import etc.exception.invalid_input_exception.InvalidInputException;
 import model.Cleaner;
+import service.Persistence;
 import service.Service;
 
 import java.sql.SQLException;
@@ -21,7 +22,9 @@ public class CleanerService extends Service<Cleaner> {
                 gender,
                 validation.birthDateValidation(),
                 validation.cpfValidation(),
-                validation.identityValidation(), null, null));
+                validation.identityValidation(),
+                Persistence.user.getAddress(),
+                Persistence.user.getCredentials()));
     }
 
     @Override

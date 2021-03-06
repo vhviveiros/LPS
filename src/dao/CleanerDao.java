@@ -18,7 +18,7 @@ public class CleanerDao extends UserDao<Cleaner> {
     @Override
     public Cleaner getItem(String[] args) throws SQLException {
         PreparedStatement ps = Persistence.CONNECTION.getConnection().prepareStatement(
-                "SELECT FIRST FROM tbl_address WHERE cpf=" + args[0] + "&& identity=" + args[1]);
+                "SELECT FIRST FROM tbl_address WHERE cpf="+ "\"" + args[0]+ "\"" + "&& identity="+ "\"" + args[1]+ "\"");
         ResultSet rs = ps.executeQuery();
 
         return new Cleaner(

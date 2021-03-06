@@ -81,13 +81,16 @@ public class FormCreateUser {
             else
                 Persistence.CLEANER_SERVICE.insert(userFields);
 
+            var address = Persistence.user.getAddress();
             Persistence.CLIENT_SERVICE.updateData(new String[]{userFields[2], userFields[3]});
+            Persistence.user.setAddress(address);
 
             clearFields();
             SwingUtilities.getWindowAncestor(rootPanel).dispose();
         } catch (InvalidInputException e) {
             showErrorDialog(e.getMessage());
         } catch (SQLException e) {
+            e.printStackTrace();
             showErrorDialog("Sql error!");
         }
     }
@@ -103,10 +106,7 @@ public class FormCreateUser {
             ftfIdentity = new JFormattedTextField(MaskFormatters.identidadeFormat());
 
         } catch (InvalidDateException | InvalidCpfInputException | InvalididentityException e) {
-            JOptionPane.showMessageDialog(
-                    null,
-                    e.getMessage(),
-                    "Erro", JOptionPane.ERROR_MESSAGE);
+            showErrorDialog(e.getMessage());
         }
     }
 

@@ -16,19 +16,21 @@ public class ClientDao extends UserDao<Client> {
     @Override
     public Client getItem(String[] args) throws SQLException {
         PreparedStatement ps = Persistence.CONNECTION.getConnection().prepareStatement(
-                "SELECT FIRST FROM tbl_address WHERE cpf=" + args[0] + "&& identity=" + args[1]);
+                "SELECT * FROM tbl_user WHERE cpf=" + "\"" + args[0] + "\"" + " && identity=" + "\"" + args[1] + "\"");
         ResultSet rs = ps.executeQuery();
 
-        return new Client(
-                rs.getInt("id"),
-                rs.getString("name"),
-                rs.getBoolean("gender"),
-                new java.util.Date(rs.getDate("birthdate").getTime()),
-                rs.getLong("cpf"),
-                rs.getLong("identity"),
-                Persistence.ADDRESS_SERVICE.getItem(args),
-                Persistence.CREDENTIALS_SERVICE.getItem(args)
-        );
+        if (rs.next())
+            return new Client(
+                    rs.getInt("id"),
+                    rs.getString("name"),
+                    rs.getBoolean("gender"),
+                    new java.util.Date(rs.getDate("birthdate").getTime()),
+                    rs.getLong("cpf"),
+                    rs.getLong("identity"),
+                    Persistence.ADDRESS_SERVICE.getItem(args),
+                    Persistence.CREDENTIALS_SERVICE.getItem(args)
+            );
+        throw new SQLException();
     }
 
     @Override

@@ -8,10 +8,10 @@ public class Connection {
 
     public Connection() {
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
-            conn = DriverManager.getConnection("jdbc:mysql://localhost/mydb?" +
-                    "user=root&password=0912");
-        } catch (SQLException | ClassNotFoundException | IllegalAccessException | InstantiationException e) {
+            Class.forName("org.gjt.mm.mysql.Driver");
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb?autoReconnect=true&useSSL=false", "root",
+                    "0912");
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
     }

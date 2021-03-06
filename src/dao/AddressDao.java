@@ -36,17 +36,24 @@ public class AddressDao implements Dao<Address> {
     @Override
     public Address getItem(String[] args) throws SQLException {
         PreparedStatement ps = Persistence.CONNECTION.getConnection().prepareStatement(
-                "SELECT FIRST FROM tbl_address WHERE id=" + args[0]);
+                "SELECT * FROM tbl_address WHERE " +
+                        "address=" + "\"" + args[0] + "\"" +
+                        " && number=" + "\"" + args[1] + "\"" +
+                        " && city=" + "\"" + args[2] + "\"" +
+                        " && state=" + "\"" + args[3] + "\"" +
+                        " && district=" + "\"" + args[4] + "\"");
         ResultSet rs = ps.executeQuery();
 
-        return new Address(
-                rs.getInt("id"),
-                rs.getString("address"),
-                rs.getInt("number"),
-                rs.getString("city"),
-                rs.getString("state"),
-                rs.getString("district")
-        );
+        if (rs.next())
+            return new Address(
+                    rs.getInt("id"),
+                    rs.getString("address"),
+                    rs.getInt("number"),
+                    rs.getString("city"),
+                    rs.getString("state"),
+                    rs.getString("district")
+            );
+        throw new SQLException();
     }
 
     @Override
