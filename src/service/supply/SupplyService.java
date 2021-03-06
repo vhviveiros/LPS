@@ -1,18 +1,17 @@
 package service.supply;
 
 import dao.SupplyDAO;
-import service.Persistence;
 import etc.exception.invalid_input_exception.InvalidInputException;
 import model.Supply;
 import service.Service;
 
-import java.util.ArrayList;
+import java.sql.SQLException;
 
-public class SupplyService implements Service<Supply> {
+public class SupplyService extends Service<Supply> {
     private final SupplyDAO supplyDAO = new SupplyDAO();
 
     @Override
-    public void insert(String[] args) throws InvalidInputException {
+    public void insert(String[] args) throws InvalidInputException, SQLException {
         SupplyValidation validation = new SupplyValidation(args);
 
         supplyDAO.insert(new Supply(
@@ -39,7 +38,7 @@ public class SupplyService implements Service<Supply> {
     }
 
     @Override
-    public ArrayList<Supply> getList(String[] args) {
-        return Persistence.SUPPLIES.retrieveData();
+    public void updateData(String[] args) throws SQLException {
+        supplyDAO.getList(args);
     }
 }

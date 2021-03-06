@@ -1,27 +1,27 @@
 package service.user;
 
-import dao.UserDao;
+import dao.CleanerDao;
 import etc.exception.invalid_input_exception.InvalidInputException;
 import model.Cleaner;
 import service.Service;
 
-import java.util.ArrayList;
+import java.sql.SQLException;
 
-public class CleanerService implements Service<Cleaner> {
-    private final UserDao userDao = new UserDao();
+public class CleanerService extends Service<Cleaner> {
+    private final CleanerDao cleanerDao = new CleanerDao();
 
     @Override
-    public void insert(String[] args) throws InvalidInputException {
+    public void insert(String[] args) throws InvalidInputException, SQLException {
         UserValidation validation = new UserValidation(args);
 
         boolean gender = args[4].equals("Masculino");
 
-        userDao.insert(new Cleaner(
+        cleanerDao.insert(new Cleaner(
                 validation.nameValidation(),
                 gender,
                 validation.birthDateValidation(),
                 validation.cpfValidation(),
-                validation.identityValidation(),null));
+                validation.identityValidation(), null, null));
     }
 
     @Override
@@ -40,7 +40,7 @@ public class CleanerService implements Service<Cleaner> {
     }
 
     @Override
-    public ArrayList<Cleaner> getList(String[] args) {
-        return null;
+    public void updateData(String[] args) throws SQLException {
+
     }
 }

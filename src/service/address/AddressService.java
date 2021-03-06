@@ -3,15 +3,20 @@ package service.address;
 import dao.AddressDao;
 import etc.exception.invalid_input_exception.InvalidInputException;
 import model.Address;
+import model.Client;
+import service.Persistence;
 import service.Service;
 
-import java.util.ArrayList;
+import java.sql.SQLException;
 
-public class AddressService implements Service<Address> {
+public class AddressService extends Service<Address> {
     private final AddressDao addressDao = new AddressDao();
 
     @Override
-    public void insert(String[] args) throws InvalidInputException {
+    public void insert(String[] args) throws InvalidInputException, SQLException {
+        Persistence.user = new Client(null, false, null, 00000000000, 00000000, null,
+                Persistence.user.getCredentials());
+
         AddressValidation validation = new AddressValidation(args);
 
         addressDao.insert(new Address(
@@ -38,7 +43,7 @@ public class AddressService implements Service<Address> {
     }
 
     @Override
-    public ArrayList<Address> getList(String[] args) {
-        return null;
+    public void updateData(String[] args) throws SQLException {
+        Persistence.user.setAddress(addressDao.getItem(args));
     }
 }

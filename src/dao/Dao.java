@@ -2,16 +2,17 @@ package dao;
 
 import model.Model;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public interface Dao<T extends Model> {
-    public void insert(T model);
+    public void insert(T model) throws SQLException;
 
     public void remove(T model);
 
-    public void alter(T oldValue, T newValue);
+    public void alter(T oldValue, T newValue) throws SQLException;
 
-    public T getItem(String[] args);
+    public T getItem(String[] args) throws SQLException;
 
-    public ArrayList<T> getList(String[] args);
+    public ArrayList<T> getList(String[] args) throws SQLException;
 }

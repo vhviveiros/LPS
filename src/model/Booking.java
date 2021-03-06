@@ -9,6 +9,15 @@ public class Booking extends Model{
     private double price;
     private Date date;
 
+    public Booking(int id, String title, String details, Client client, double price, Date date) {
+        super(id);
+        this.title = title;
+        this.details = details;
+        this.client = client;
+        this.price = price;
+        this.date = date;
+    }
+
     public Booking(String title, String details, Client client, double price, Date date) {
         this.title = title;
         this.details = details;

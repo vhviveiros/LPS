@@ -10,6 +10,14 @@ public class Order extends Model{
     private Client client;
     private Booking booking;
 
+    public Order(int id, String details, ArrayList<Supply> usedSupplies, Client client, Booking booking) {
+        super(id);
+        this.details = details;
+        this.usedSupplies = usedSupplies;
+        this.client = client;
+        this.booking = booking;
+    }
+
     public Order(String details, ArrayList<Supply> usedSupplies, Client client, Booking booking) {
         this.details = details;
         this.usedSupplies = usedSupplies;

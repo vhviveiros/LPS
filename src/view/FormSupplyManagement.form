@@ -38,7 +38,7 @@
             <properties/>
             <border type="none"/>
             <children>
-              <component id="fd01f" class="javax.swing.JButton" binding="btnAdicionar">
+              <component id="fd01f" class="javax.swing.JButton" binding="btnAdd">
                 <constraints>
                   <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
@@ -46,7 +46,7 @@
                   <text value="Adicionar"/>
                 </properties>
               </component>
-              <component id="ea0a9" class="javax.swing.JButton" binding="btnAlterar">
+              <component id="ea0a9" class="javax.swing.JButton" binding="btnAlter">
                 <constraints>
                   <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
@@ -54,7 +54,7 @@
                   <text value="Alterar"/>
                 </properties>
               </component>
-              <component id="bd0e9" class="javax.swing.JButton" binding="btnExcluir">
+              <component id="bd0e9" class="javax.swing.JButton" binding="btnRemove">
                 <constraints>
                   <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
@@ -62,7 +62,7 @@
                   <text value="Excluir"/>
                 </properties>
               </component>
-              <component id="afc08" class="javax.swing.JButton" binding="btnCancelar">
+              <component id="afc08" class="javax.swing.JButton" binding="btnCancel">
                 <constraints>
                   <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
@@ -82,7 +82,7 @@
         <properties/>
         <border type="none"/>
         <children>
-          <component id="1f96" class="javax.swing.JTextField" binding="edtPesquisar">
+          <component id="1f96" class="javax.swing.JTextField" binding="edtSearch">
             <constraints>
               <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                 <preferred-size width="150" height="30"/>
@@ -90,7 +90,7 @@
             </constraints>
             <properties/>
           </component>
-          <component id="7b7ab" class="javax.swing.JButton" binding="pesquisarButton" default-binding="true">
+          <component id="7b7ab" class="javax.swing.JButton" binding="btnSearch" default-binding="true">
             <constraints>
               <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -126,7 +126,7 @@
               <text value="Quantidade"/>
             </properties>
           </component>
-          <component id="9f403" class="javax.swing.JTextField" binding="edtNome">
+          <component id="9f403" class="javax.swing.JTextField" binding="edtName">
             <constraints>
               <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                 <preferred-size width="681" height="30"/>
@@ -134,7 +134,7 @@
             </constraints>
             <properties/>
           </component>
-          <component id="44a48" class="javax.swing.JTextField" binding="edtQtd">
+          <component id="44a48" class="javax.swing.JTextField" binding="edtAmount">
             <constraints>
               <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false">
                 <preferred-size width="100" height="30"/>
@@ -150,7 +150,7 @@
               <text value="Validade"/>
             </properties>
           </component>
-          <component id="650b7" class="javax.swing.JTextArea" binding="edtDetalhes">
+          <component id="650b7" class="javax.swing.JTextArea" binding="edtDetails">
             <constraints>
               <grid row="3" column="0" row-span="3" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
                 <preferred-size width="681" height="50"/>
@@ -176,7 +176,7 @@
               <text value="Preço"/>
             </properties>
           </component>
-          <component id="40eb3" class="javax.swing.JFormattedTextField" binding="ftfPreco" custom-create="true">
+          <component id="40eb3" class="javax.swing.JFormattedTextField" binding="ftfPrice" custom-create="true">
             <constraints>
               <grid row="5" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false">
                 <preferred-size width="100" height="30"/>
@@ -184,7 +184,7 @@
             </constraints>
             <properties/>
           </component>
-          <component id="a9011" class="javax.swing.JFormattedTextField" binding="ftfValidade" custom-create="true">
+          <component id="a9011" class="javax.swing.JFormattedTextField" binding="ftfExpirationDate" custom-create="true">
             <constraints>
               <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false">
                 <preferred-size width="100" height="30"/>
@@ -201,7 +201,7 @@
         <properties/>
         <border type="none"/>
         <children>
-          <component id="6f6ed" class="javax.swing.JTable" binding="lista" custom-create="true">
+          <component id="6f6ed" class="javax.swing.JTable" binding="jtList" custom-create="true">
             <constraints/>
             <properties/>
           </component>

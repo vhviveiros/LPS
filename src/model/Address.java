@@ -10,6 +10,15 @@ public class Address extends Model{
     public static final String[] STATES = new String[] {"AC", "AL", "AP", "AM", "BA", "CE", "ES","GO", "MA", "MT", "MS", "MG",
             "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO", "DF"};
 
+    public Address(int id, String address, int number, String city, String state, String district) {
+        super(id);
+        this.address = address;
+        this.number = number;
+        this.city = city;
+        this.state = state;
+        this.district = district;
+    }
+
     public Address(String address, int number, String city, String state, String district) {
         this.address = address;
         this.number = number;

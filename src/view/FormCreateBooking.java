@@ -8,7 +8,10 @@ import model.Client;
 
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
+import java.sql.SQLException;
 import java.util.Date;
+
+import static view.Tools.showErrorDialog;
 
 public class FormCreateBooking {
     private JPanel rootPanel;
@@ -21,7 +24,7 @@ public class FormCreateBooking {
     private JTextField edtTitle;
     private JTextArea edtDetails;
     private JFormattedTextField ftfPrice;
-    private JTable jtLista;
+    private JTable jtList;
 
     public FormCreateBooking() {
         btnCancel.addActionListener(e -> {
@@ -39,14 +42,23 @@ public class FormCreateBooking {
                     edtTitle.getText(),
                     edtDetails.getText(),
                     ftfPrice.getValue().toString()});
-
             clearFields();
-            ((AbstractTableModel) jtLista.getModel()).fireTableDataChanged();
+            updateTable();
         } catch (InvalidInputException e) {
-            JOptionPane.showMessageDialog(
-                    null,
-                    e.getMessage(),
-                    "Erro", JOptionPane.ERROR_MESSAGE);
+            showErrorDialog(e.getMessage());
+        } catch (SQLException e) {
+            showErrorDialog("Sql error!");
+        }
+    }
+
+
+
+    private void updateTable() {
+        try {
+            Persistence.BOOKING_SERVICE.updateData(new String[]{String.valueOf(Persistence.user.getId())});
+            ((AbstractTableModel) jtList.getModel()).fireTableDataChanged();
+        } catch (SQLException throwables) {
+            showErrorDialog("Sql error!");
         }
     }
 
@@ -57,14 +69,15 @@ public class FormCreateBooking {
     }
 
     private void createUIComponents() {
-        jtLista = new JTable(new BookingRegisterTableModel());
+        jtList = new JTable(new BookingRegisterTableModel());
         ftfPrice = new JFormattedTextField(MaskFormatters.moneyFormat());
         ftfPrice.setColumns(10);
         ftfPrice.setValue(0.00);
+        updateTable();
     }
 
     public static void main(String[] args) {
-        Persistence.user = new Client("Cliente", false, new Date(), 00000000000, 00000000, null);
+        Persistence.user = new Client("Cliente", true, new Date(), 00000000000, 00000000, null, null);
 
         JFrame frame = new JFrame();
         frame.setContentPane(new FormCreateBooking().rootPanel);

@@ -5,13 +5,15 @@ import etc.exception.invalid_input_exception.InvalidInputException;
 import model.Booking;
 import service.Service;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class BookingService implements Service<Booking> {
+public class BookingService extends Service<Booking> {
     private final BookingDao bookingDao = new BookingDao();
+    private ArrayList<Booking> clientBookings;
 
     @Override
-    public void insert(String[] args) throws InvalidInputException {
+    public void insert(String[] args) throws InvalidInputException, SQLException {
         BookingValidation validation = new BookingValidation(args);
 
         bookingDao.insert(new Booking(
@@ -39,7 +41,7 @@ public class BookingService implements Service<Booking> {
     }
 
     @Override
-    public ArrayList<Booking> getList(String[] args) {
-        return bookingDao.getList(args);
+    public void updateData(String[] args) throws SQLException {
+        clientBookings = bookingDao.getList(args);
     }
 }

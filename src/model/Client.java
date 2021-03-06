@@ -3,7 +3,11 @@ package model;
 import java.util.Date;
 
 public class Client extends User {
-    public Client(String nome, boolean sexo, Date nascimento, long cpf, long identidade, Address address) {
-        super(nome, sexo, nascimento, cpf, identidade, address);
+    public Client(int id, String name, boolean gender, Date birthDate, long cpf, long identity, Address address, Credentials credentials) {
+        super(id, name, gender, birthDate, cpf, identity, address, credentials);
+    }
+
+    public Client(String name, boolean gender, Date birthDate, long cpf, long identity, Address address, Credentials credentials) {
+        super(name, gender, birthDate, cpf, identity, address, credentials);
     }
 }

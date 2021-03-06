@@ -28,7 +28,7 @@
             <properties/>
             <border type="none"/>
             <children>
-              <component id="d0e22" class="javax.swing.JButton" binding="btnAdicionar">
+              <component id="d0e22" class="javax.swing.JButton" binding="btnAdd">
                 <constraints>
                   <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
@@ -36,7 +36,7 @@
                   <text value="Adicionar"/>
                 </properties>
               </component>
-              <component id="5236a" class="javax.swing.JButton" binding="btnCancelar">
+              <component id="5236a" class="javax.swing.JButton" binding="btnCancel">
                 <constraints>
                   <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
@@ -62,7 +62,7 @@
                   <text value="Nome"/>
                 </properties>
               </component>
-              <component id="d8b4b" class="javax.swing.JTextField" binding="edtNome">
+              <component id="d8b4b" class="javax.swing.JTextField" binding="edtName">
                 <constraints>
                   <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                     <preferred-size width="150" height="30"/>
@@ -102,7 +102,7 @@
                 </constraints>
                 <properties/>
               </component>
-              <component id="d328e" class="javax.swing.JFormattedTextField" binding="ftfIdentidade" custom-create="true">
+              <component id="d328e" class="javax.swing.JFormattedTextField" binding="ftfIdentity" custom-create="true">
                 <constraints>
                   <grid row="3" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                     <preferred-size width="150" height="30"/>
@@ -110,7 +110,7 @@
                 </constraints>
                 <properties/>
               </component>
-              <component id="7510a" class="javax.swing.JFormattedTextField" binding="ftfNascimento" custom-create="true">
+              <component id="7510a" class="javax.swing.JFormattedTextField" binding="ftfBirthDay" custom-create="true">
                 <constraints>
                   <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                     <preferred-size width="150" height="30"/>
@@ -126,7 +126,7 @@
                   <text value="Sexo"/>
                 </properties>
               </component>
-              <component id="ab527" class="javax.swing.JComboBox" binding="cbSexo" custom-create="true">
+              <component id="ab527" class="javax.swing.JComboBox" binding="cbGender" custom-create="true">
                 <constraints>
                   <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
@@ -166,7 +166,7 @@
                   <text value="Número"/>
                 </properties>
               </component>
-              <component id="80634" class="javax.swing.JTextField" binding="edtNumero">
+              <component id="80634" class="javax.swing.JTextField" binding="edtNumber">
                 <constraints>
                   <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="1" indent="0" use-parent-layout="false">
                     <preferred-size width="-1" height="30"/>
@@ -174,7 +174,7 @@
                 </constraints>
                 <properties/>
               </component>
-              <component id="2bfcd" class="javax.swing.JTextField" binding="edtCidade">
+              <component id="2bfcd" class="javax.swing.JTextField" binding="edtCity">
                 <constraints>
                   <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                     <preferred-size width="150" height="30"/>
@@ -182,7 +182,7 @@
                 </constraints>
                 <properties/>
               </component>
-              <component id="ce850" class="javax.swing.JComboBox" binding="cbEstado" custom-create="true">
+              <component id="ce850" class="javax.swing.JComboBox" binding="cbState" custom-create="true">
                 <constraints>
                   <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="0" indent="0" use-parent-layout="false">
                     <preferred-size width="80" height="-1"/>
@@ -214,7 +214,7 @@
                       <text value="Bairro"/>
                     </properties>
                   </component>
-                  <component id="bcdc9" class="javax.swing.JTextField" binding="edtLogradouro">
+                  <component id="bcdc9" class="javax.swing.JTextField" binding="edtAddress">
                     <constraints>
                       <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                         <preferred-size width="150" height="30"/>
@@ -222,7 +222,7 @@
                     </constraints>
                     <properties/>
                   </component>
-                  <component id="1b830" class="javax.swing.JTextField" binding="edtBairro">
+                  <component id="1b830" class="javax.swing.JTextField" binding="edtDistrict">
                     <constraints>
                       <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                         <preferred-size width="150" height="30"/>
@@ -252,7 +252,7 @@
                   <text value="Cadastro de "/>
                 </properties>
               </component>
-              <component id="1a14" class="javax.swing.JComboBox" binding="cbUsuario" custom-create="true">
+              <component id="1a14" class="javax.swing.JComboBox" binding="cbUser" custom-create="true">
                 <constraints>
                   <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>

@@ -1,27 +1,30 @@
 package service.user;
 
-import dao.UserDao;
+import dao.ClientDao;
 import etc.exception.invalid_input_exception.InvalidInputException;
 import model.Client;
+import service.Persistence;
 import service.Service;
 
-import java.util.ArrayList;
+import java.sql.SQLException;
 
-public class ClientService implements Service<Client> {
-    private final UserDao userDao = new UserDao();
+public class ClientService extends Service<Client> {
+    private final ClientDao clientDao = new ClientDao();
 
     @Override
-    public void insert(String[] args) throws InvalidInputException {
+    public void insert(String[] args) throws InvalidInputException, SQLException {
         UserValidation validation = new UserValidation(args);
 
         boolean gender = args[4].equals("Masculino");
 
-        userDao.insert(new Client(
+        clientDao.insert(new Client(
                 validation.nameValidation(),
                 gender,
                 validation.birthDateValidation(),
                 validation.cpfValidation(),
-                validation.identityValidation(),null));
+                validation.identityValidation(),
+                Persistence.user.getAddress(),
+                Persistence.user.getCredentials()));
     }
 
     @Override
@@ -40,7 +43,7 @@ public class ClientService implements Service<Client> {
     }
 
     @Override
-    public ArrayList<Client> getList(String[] args) {
-        return null;
+    public void updateData(String[] args) throws SQLException {
+        Persistence.user = clientDao.getItem(args);
     }
 }

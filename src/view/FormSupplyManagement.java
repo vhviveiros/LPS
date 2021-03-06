@@ -8,28 +8,29 @@ import etc.exception.invalid_input_exception.InvalidInputException;
 
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
+import java.sql.SQLException;
 
 public class FormSupplyManagement {
-    private JButton btnAdicionar;
-    private JButton btnAlterar;
-    private JButton btnExcluir;
-    private JButton btnCancelar;
-    private JTextField edtPesquisar;
-    private JButton pesquisarButton;
-    private JTable lista;
-    private JTextField edtNome;
-    private JTextField edtQtd;
-    private JTextArea edtDetalhes;
+    private JButton btnAdd;
+    private JButton btnAlter;
+    private JButton btnRemove;
+    private JButton btnCancel;
+    private JTextField edtSearch;
+    private JButton btnSearch;
+    private JTable jtList;
+    private JTextField edtName;
+    private JTextField edtAmount;
+    private JTextArea edtDetails;
     private JPanel rootPanel;
-    private JFormattedTextField ftfPreco;
-    private JFormattedTextField ftfValidade;
+    private JFormattedTextField ftfPrice;
+    private JFormattedTextField ftfExpirationDate;
 
     public FormSupplyManagement() {
-        btnCancelar.addActionListener(e -> {
+        btnCancel.addActionListener(e -> {
             clearFields();
         });
 
-        btnAdicionar.addActionListener(e -> {
+        btnAdd.addActionListener(e -> {
             insert();
         });
     }
@@ -37,15 +38,15 @@ public class FormSupplyManagement {
     private void insert() {
         try {
             Persistence.SUPPLY_SERVICE.insert(new String[]{
-                    edtNome.getText(),
-                    edtDetalhes.getText(),
-                    edtQtd.getText(),
-                    ftfValidade.getText(),
-                    ftfPreco.getValue().toString()});
+                    edtName.getText(),
+                    edtDetails.getText(),
+                    edtAmount.getText(),
+                    ftfExpirationDate.getText(),
+                    ftfPrice.getValue().toString()});
 
             clearFields();
-            ((AbstractTableModel) lista.getModel()).fireTableDataChanged();
-        } catch (InvalidInputException e) {
+            ((AbstractTableModel) jtList.getModel()).fireTableDataChanged();
+        } catch (InvalidInputException | SQLException e) {
             JOptionPane.showMessageDialog(
                     null,
                     e.getMessage(),
@@ -54,21 +55,21 @@ public class FormSupplyManagement {
     }
 
     private void clearFields() {
-        edtNome.setText("");
-        edtQtd.setText("");
-        ftfValidade.setValue("");
-        edtDetalhes.setText("");
-        ftfPreco.setValue(0.00);
+        edtName.setText("");
+        edtAmount.setText("");
+        ftfExpirationDate.setValue("");
+        edtDetails.setText("");
+        ftfPrice.setValue(0.00);
     }
 
     private void createUIComponents() {
-        lista = new JTable(new SupplyTableModel());
-        ftfPreco = new JFormattedTextField(MaskFormatters.moneyFormat());
-        ftfPreco.setColumns(10);
-        ftfPreco.setValue(0.00);
+        jtList = new JTable(new SupplyTableModel());
+        ftfPrice = new JFormattedTextField(MaskFormatters.moneyFormat());
+        ftfPrice.setColumns(10);
+        ftfPrice.setValue(0.00);
 
         try {
-            ftfValidade = new JFormattedTextField(MaskFormatters.dateFormat());
+            ftfExpirationDate = new JFormattedTextField(MaskFormatters.dateFormat());
         } catch (InvalidDateException e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }

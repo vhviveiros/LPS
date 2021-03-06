@@ -9,14 +9,27 @@ public class User extends Model{
     private long cpf;
     private long identity;
     private Address address;
+    private Credentials credentials;
 
-    public User(String name, boolean gender, Date birthDate, long cpf, long identity, Address address) {
+    public User(int id, String name, boolean gender, Date birthDate, long cpf, long identity, Address address, Credentials credentials) {
+        super(id);
         this.name = name;
         this.gender = gender;
         this.birthDate = birthDate;
         this.cpf = cpf;
         this.identity = identity;
         this.address = address;
+        this.credentials = credentials;
+    }
+
+    public User(String name, boolean gender, Date birthDate, long cpf, long identity, Address address, Credentials credentials) {
+        this.name = name;
+        this.gender = gender;
+        this.birthDate = birthDate;
+        this.cpf = cpf;
+        this.identity = identity;
+        this.address = address;
+        this.credentials = credentials;
     }
 
     public String getName() {
@@ -27,7 +40,7 @@ public class User extends Model{
         this.name = name;
     }
 
-    public boolean isGender() {
+    public boolean getGender() {
         return gender;
     }
 
@@ -65,6 +78,18 @@ public class User extends Model{
 
     public void setAddress(Address address) {
         this.address = address;
+    }
+
+    public boolean isGender() {
+        return gender;
+    }
+
+    public Credentials getCredentials() {
+        return credentials;
+    }
+
+    public void setCredentials(Credentials credentials) {
+        this.credentials = credentials;
     }
 
     @Override

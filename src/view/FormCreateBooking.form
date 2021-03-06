@@ -169,7 +169,7 @@
         <properties/>
         <border type="none"/>
         <children>
-          <component id="6f6ed" class="javax.swing.JTable" binding="jtLista" custom-create="true">
+          <component id="6f6ed" class="javax.swing.JTable" binding="jtList" custom-create="true">
             <constraints/>
             <properties/>
           </component>
