@@ -1,9 +1,7 @@
-package service.address;
+package validation;
 
 import etc.exception.invalid_input_exception.*;
 import model.Address;
-import service.Validation;
-
 import java.util.Arrays;
 
 public class AddressValidation extends Validation {

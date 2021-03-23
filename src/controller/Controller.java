@@ -1,4 +1,4 @@
-package service;
+package controller;
 
 import etc.exception.invalid_input_exception.InvalidInputException;
 import model.Model;
@@ -6,7 +6,7 @@ import model.Model;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public abstract class Service<T extends Model> {
+public abstract class Controller<T extends Model> {
     protected ArrayList<T> data;
 
     public abstract void insert(String[] args) throws InvalidInputException, SQLException;

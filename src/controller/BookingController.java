@@ -1,14 +1,13 @@
-package service.booking;
+package controller;
 
 import dao.BookingDao;
 import etc.exception.invalid_input_exception.InvalidInputException;
 import model.Booking;
-import service.Service;
+import validation.BookingValidation;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 
-public class BookingService extends Service<Booking> {
+public class BookingController extends Controller<Booking> {
     private final BookingDao bookingDao = new BookingDao();
 
     @Override

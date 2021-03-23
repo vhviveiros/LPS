@@ -1,14 +1,13 @@
-package service.user;
+package controller;
 
 import dao.CleanerDao;
 import etc.exception.invalid_input_exception.InvalidInputException;
 import model.Cleaner;
-import service.Persistence;
-import service.Service;
+import validation.UserValidation;
 
 import java.sql.SQLException;
 
-public class CleanerService extends Service<Cleaner> {
+public class CleanerController extends Controller<Cleaner> {
     private final CleanerDao cleanerDao = new CleanerDao();
 
     @Override
@@ -23,8 +22,8 @@ public class CleanerService extends Service<Cleaner> {
                 validation.birthDateValidation(),
                 validation.cpfValidation(),
                 validation.identityValidation(),
-                Persistence.currentUser.getAddress(),
-                Persistence.currentUser.getCredentials()));
+                AppVariables.currentUser.getAddress(),
+                AppVariables.currentUser.getCredentials()));
     }
 
     @Override

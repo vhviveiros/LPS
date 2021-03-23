@@ -1,11 +1,10 @@
-package service.supply;
+package validation;
 
-import service.Persistence;
+import controller.AppVariables;
 import etc.exception.invalid_input_exception.InvalidDateException;
 import etc.exception.invalid_input_exception.InvalidNameInputException;
 import etc.exception.invalid_input_exception.InvalidPriceException;
 import etc.exception.invalid_input_exception.InvalidQuantityException;
-import service.Validation;
 
 import java.util.Date;
 
@@ -25,7 +24,7 @@ public class SupplyValidation extends Validation {
     }
 
     public String nameValidation() throws InvalidNameInputException {
-        if (Persistence.SUPPLY_SERVICE.getItem(new String[]{name}) != null)
+        if (AppVariables.SUPPLY_SERVICE.getItem(new String[]{name}) != null)
             throw new InvalidNameInputException.ExistingNameException();
 
         return super.nameValidation(name);

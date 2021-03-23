@@ -1,11 +1,9 @@
-package service.user;
+package validation;
 
 import etc.exception.invalid_input_exception.InvalidCpfInputException;
 import etc.exception.invalid_input_exception.InvalidDateException;
 import etc.exception.invalid_input_exception.InvalidNameInputException;
 import etc.exception.invalid_input_exception.InvalididentityException;
-import service.Validation;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;

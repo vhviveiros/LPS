@@ -1,9 +1,8 @@
-package service.booking;
+package validation;
 
-import service.Persistence;
+import controller.AppVariables;
 import etc.exception.invalid_input_exception.*;
 import model.Client;
-import service.Validation;
 
 import java.util.Date;
 
@@ -32,10 +31,10 @@ public class BookingValidation extends Validation {
     }
 
     public Client clientValidation() throws InvalidUserExcepcion {
-        if (!(Persistence.currentUser instanceof Client))
+        if (!(AppVariables.currentUser instanceof Client))
             throw new InvalidUserExcepcion();
 
-        return (Client) Persistence.currentUser;
+        return (Client) AppVariables.currentUser;
     }
 
     public double priceValidation() throws InvalidPriceException {

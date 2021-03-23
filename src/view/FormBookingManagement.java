@@ -3,7 +3,7 @@ package view;
 import controller.BookingRegisterTableModel;
 import etc.MaskFormatters;
 import etc.exception.invalid_input_exception.InvalidDateException;
-import service.Persistence;
+import controller.AppVariables;
 import etc.exception.invalid_input_exception.InvalidInputException;
 import model.Client;
 
@@ -40,7 +40,7 @@ public class FormBookingManagement {
 
     private void insert() {
         try {
-            Persistence.BOOKING_SERVICE.insert(new String[]{
+            AppVariables.BOOKING_SERVICE.insert(new String[]{
                     edtTitle.getText(),
                     edtDetails.getText(),
                     ftfPrice.getValue().toString(),
@@ -56,7 +56,7 @@ public class FormBookingManagement {
 
     private void updateTable() {
         try {
-            Persistence.BOOKING_SERVICE.updateData(new String[]{String.valueOf(Persistence.currentUser.getId())});
+            AppVariables.BOOKING_SERVICE.updateData(new String[]{String.valueOf(AppVariables.currentUser.getId())});
             if (jtList != null)
                 ((AbstractTableModel) jtList.getModel()).fireTableDataChanged();
         } catch (SQLException throwables) {
@@ -87,7 +87,7 @@ public class FormBookingManagement {
     }
 
     public static void main(String[] args) {
-        Persistence.currentUser = new Client(19, "teste", true, new Date(), 00000000000, 00000000, null, null);
+        AppVariables.currentUser = new Client(19, "teste", true, new Date(), 00000000000, 00000000, null, null);
 
         JFrame frame = new JFrame();
         frame.setContentPane(new FormBookingManagement().rootPanel);

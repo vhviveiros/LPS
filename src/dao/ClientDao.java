@@ -1,7 +1,7 @@
 package dao;
 
 import model.Client;
-import service.Persistence;
+import controller.AppVariables;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,7 +15,7 @@ public class ClientDao extends UserDao<Client> {
      */
     @Override
     public Client getItem(String[] args) throws SQLException {
-        PreparedStatement ps = Persistence.CONNECTION.getConnection().prepareStatement(
+        PreparedStatement ps = AppVariables.CONNECTION.getConnection().prepareStatement(
                 "SELECT * FROM tbl_user WHERE cpf=" + "\"" + args[0] + "\"" + " && identity=" + "\"" + args[1] + "\"");
         ResultSet rs = ps.executeQuery();
 
@@ -27,8 +27,8 @@ public class ClientDao extends UserDao<Client> {
                     new java.util.Date(rs.getDate("birthdate").getTime()),
                     rs.getLong("cpf"),
                     rs.getLong("identity"),
-                    Persistence.ADDRESS_SERVICE.getItem(args),
-                    Persistence.CREDENTIALS_SERVICE.getItem(args)
+                    AppVariables.ADDRESS_SERVICE.getItem(args),
+                    AppVariables.CREDENTIALS_SERVICE.getItem(args)
             );
         throw new SQLException();
     }

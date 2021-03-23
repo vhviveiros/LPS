@@ -8,7 +8,7 @@ import etc.exception.invalid_input_exception.InvalididentityException;
 import model.Address;
 import model.Client;
 import model.Credentials;
-import service.Persistence;
+import controller.AppVariables;
 
 import javax.swing.*;
 
@@ -73,17 +73,17 @@ public class FormCreateUser {
                     edtDistrict.getText()
             };
 
-            Persistence.ADDRESS_SERVICE.insert(addressFields);
-            Persistence.ADDRESS_SERVICE.updateData(addressFields);
+            AppVariables.ADDRESS_SERVICE.insert(addressFields);
+            AppVariables.ADDRESS_SERVICE.updateData(addressFields);
 
             if (cbUser.getSelectedItem().equals("Cliente"))
-                Persistence.CLIENT_SERVICE.insert(userFields);
+                AppVariables.CLIENT_SERVICE.insert(userFields);
             else
-                Persistence.CLEANER_SERVICE.insert(userFields);
+                AppVariables.CLEANER_SERVICE.insert(userFields);
 
-            var address = Persistence.currentUser.getAddress();
-            Persistence.CLIENT_SERVICE.updateData(new String[]{userFields[2], userFields[3]});
-            Persistence.currentUser.setAddress(address);
+            var address = AppVariables.currentUser.getAddress();
+            AppVariables.CLIENT_SERVICE.updateData(new String[]{userFields[2], userFields[3]});
+            AppVariables.currentUser.setAddress(address);
 
             clearFields();
             SwingUtilities.getWindowAncestor(rootPanel).dispose();
@@ -111,7 +111,7 @@ public class FormCreateUser {
     }
 
     public static void main(String[] args) {
-        Persistence.currentUser = new Client("Cliente", true, new Date(), 00000000000, 00000000, null,
+        AppVariables.currentUser = new Client("Cliente", true, new Date(), 00000000000, 00000000, null,
                 new Credentials(1, "teste", "teste"));
 
         JFrame frame = new JFrame();

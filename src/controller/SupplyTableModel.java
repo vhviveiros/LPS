@@ -1,6 +1,5 @@
 package controller;
 
-import service.Persistence;
 import model.Supply;
 
 import javax.swing.table.AbstractTableModel;
@@ -11,7 +10,7 @@ public class SupplyTableModel extends AbstractTableModel {
 
     @Override
     public int getRowCount() {
-        return Persistence.SUPPLY_SERVICE.getData().size();
+        return AppVariables.SUPPLY_SERVICE.getData().size();
     }
 
     @Override
@@ -26,7 +25,7 @@ public class SupplyTableModel extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        Supply supply = Persistence.SUPPLY_SERVICE.getData().get(rowIndex);
+        Supply supply = AppVariables.SUPPLY_SERVICE.getData().get(rowIndex);
         String price = "R$ " + String.format("%.2f", supply.getPrice());
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
         String data = simpleDateFormat.format(supply.getExpirationDate());

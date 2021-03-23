@@ -1,13 +1,13 @@
-package service.supply;
+package controller;
 
 import dao.SupplyDAO;
 import etc.exception.invalid_input_exception.InvalidInputException;
 import model.Supply;
-import service.Service;
+import validation.SupplyValidation;
 
 import java.sql.SQLException;
 
-public class SupplyService extends Service<Supply> {
+public class SupplyController extends Controller<Supply> {
     private final SupplyDAO supplyDAO = new SupplyDAO();
 
     @Override

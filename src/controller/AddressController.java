@@ -1,21 +1,20 @@
-package service.address;
+package controller;
 
 import dao.AddressDao;
 import etc.exception.invalid_input_exception.InvalidInputException;
 import model.Address;
 import model.Client;
-import service.Persistence;
-import service.Service;
+import validation.AddressValidation;
 
 import java.sql.SQLException;
 
-public class AddressService extends Service<Address> {
+public class AddressController extends Controller<Address> {
     private final AddressDao addressDao = new AddressDao();
 
     @Override
     public void insert(String[] args) throws InvalidInputException, SQLException {
-        Persistence.currentUser = new Client(null, false, null, 00000000000, 00000000, null,
-                Persistence.currentUser.getCredentials());
+        AppVariables.currentUser = new Client(null, false, null, 00000000000, 00000000, null,
+                AppVariables.currentUser.getCredentials());
 
         AddressValidation validation = new AddressValidation(args);
 
@@ -44,6 +43,6 @@ public class AddressService extends Service<Address> {
 
     @Override
     public void updateData(String[] args) throws SQLException {
-        Persistence.currentUser.setAddress(addressDao.getItem(args));
+        AppVariables.currentUser.setAddress(addressDao.getItem(args));
     }
 }

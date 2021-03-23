@@ -1,12 +1,11 @@
-package service.credentials;
+package controller;
 
 import etc.exception.invalid_input_exception.InvalidInputException;
 import model.Credentials;
-import service.Service;
 
 import java.sql.SQLException;
 
-public class CredentialsService extends Service<Credentials> {
+public class CredentialsController extends Controller<Credentials> {
     @Override
     public void insert(String[] args) throws InvalidInputException {
 

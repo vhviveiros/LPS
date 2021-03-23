@@ -1,14 +1,13 @@
-package service.user;
+package controller;
 
 import dao.ClientDao;
 import etc.exception.invalid_input_exception.InvalidInputException;
 import model.Client;
-import service.Persistence;
-import service.Service;
+import validation.UserValidation;
 
 import java.sql.SQLException;
 
-public class ClientService extends Service<Client> {
+public class ClientController extends Controller<Client> {
     private final ClientDao clientDao = new ClientDao();
 
     @Override
@@ -23,8 +22,8 @@ public class ClientService extends Service<Client> {
                 validation.birthDateValidation(),
                 validation.cpfValidation(),
                 validation.identityValidation(),
-                Persistence.currentUser.getAddress(),
-                Persistence.currentUser.getCredentials()));
+                AppVariables.currentUser.getAddress(),
+                AppVariables.currentUser.getCredentials()));
     }
 
     @Override
@@ -44,6 +43,6 @@ public class ClientService extends Service<Client> {
 
     @Override
     public void updateData(String[] args) throws SQLException {
-        Persistence.currentUser = clientDao.getItem(args);
+        AppVariables.currentUser = clientDao.getItem(args);
     }
 }

@@ -1,4 +1,4 @@
-package service;
+package validation;
 
 import etc.exception.invalid_input_exception.InvalidDateException;
 import etc.exception.invalid_input_exception.InvalidNameInputException;

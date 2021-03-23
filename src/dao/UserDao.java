@@ -1,7 +1,7 @@
 package dao;
 
 import model.User;
-import service.Persistence;
+import controller.AppVariables;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public abstract class UserDao <T extends User> implements Dao<T>{
     @Override
     public void insert(T user) throws SQLException {
-        PreparedStatement ps = Persistence.CONNECTION.getConnection().prepareStatement(
+        PreparedStatement ps = AppVariables.CONNECTION.getConnection().prepareStatement(
                 "INSERT INTO tbl_user (name,birthdate,gender,cpf,identity,user_type,tbl_credentials_id,tbl_address_id) values " +
                         "(?,?,?,?,?,?,?,?)");
 
