@@ -22,8 +22,8 @@ public class ClientController extends Controller<Client> {
                 validation.birthDateValidation(),
                 validation.cpfValidation(),
                 validation.identityValidation(),
-                AppVariables.currentUser.getAddress(),
-                AppVariables.currentUser.getCredentials()));
+                ControllerSingleton.currentUser.getAddress(),
+                ControllerSingleton.currentUser.getCredentials()));
     }
 
     @Override
@@ -43,6 +43,6 @@ public class ClientController extends Controller<Client> {
 
     @Override
     public void updateData(String[] args) throws SQLException {
-        AppVariables.currentUser = clientDao.getItem(args);
+        ControllerSingleton.currentUser = clientDao.getItem(args);
     }
 }

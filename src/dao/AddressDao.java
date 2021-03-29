@@ -1,7 +1,7 @@
 package dao;
 
 import model.Address;
-import controller.AppVariables;
+import controller.ControllerSingleton;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -26,7 +26,7 @@ public class AddressDao implements Dao<Address> {
 
     @Override
     public void remove(Address model) {
-        AppVariables.currentUser.setAddress(null);
+        ControllerSingleton.currentUser.setAddress(null);
     }
 
     @Override

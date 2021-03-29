@@ -22,8 +22,8 @@ public class CleanerController extends Controller<Cleaner> {
                 validation.birthDateValidation(),
                 validation.cpfValidation(),
                 validation.identityValidation(),
-                AppVariables.currentUser.getAddress(),
-                AppVariables.currentUser.getCredentials()));
+                ControllerSingleton.currentUser.getAddress(),
+                ControllerSingleton.currentUser.getCredentials()));
     }
 
     @Override

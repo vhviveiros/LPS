@@ -1,7 +1,7 @@
 package dao;
 
 import model.Client;
-import controller.AppVariables;
+import controller.ControllerSingleton;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -27,8 +27,8 @@ public class ClientDao extends UserDao<Client> {
                     new java.util.Date(rs.getDate("birthdate").getTime()),
                     rs.getLong("cpf"),
                     rs.getLong("identity"),
-                    AppVariables.ADDRESS_SERVICE.getItem(args),
-                    AppVariables.CREDENTIALS_SERVICE.getItem(args)
+                    ControllerSingleton.ADDRESS_SERVICE.getItem(args),
+                    ControllerSingleton.CREDENTIALS_SERVICE.getItem(args)
             );
         throw new SQLException();
     }

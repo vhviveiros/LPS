@@ -1,6 +1,6 @@
 package validation;
 
-import controller.AppVariables;
+import controller.ControllerSingleton;
 import etc.exception.invalid_input_exception.InvalidDateException;
 import etc.exception.invalid_input_exception.InvalidNameInputException;
 import etc.exception.invalid_input_exception.InvalidPriceException;
@@ -24,7 +24,7 @@ public class SupplyValidation extends Validation {
     }
 
     public String nameValidation() throws InvalidNameInputException {
-        if (AppVariables.SUPPLY_SERVICE.getItem(new String[]{name}) != null)
+        if (ControllerSingleton.SUPPLY_SERVICE.getItem(new String[]{name}) != null)
             throw new InvalidNameInputException.ExistingNameException();
 
         return super.nameValidation(name);

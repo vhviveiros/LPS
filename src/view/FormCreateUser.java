@@ -8,7 +8,7 @@ import etc.exception.invalid_input_exception.InvalididentityException;
 import model.Address;
 import model.Client;
 import model.Credentials;
-import controller.AppVariables;
+import controller.ControllerSingleton;
 
 import javax.swing.*;
 
@@ -73,17 +73,17 @@ public class FormCreateUser {
                     edtDistrict.getText()
             };
 
-            AppVariables.ADDRESS_SERVICE.insert(addressFields);
-            AppVariables.ADDRESS_SERVICE.updateData(addressFields);
+            ControllerSingleton.ADDRESS_SERVICE.insert(addressFields);
+            ControllerSingleton.ADDRESS_SERVICE.updateData(addressFields);
 
             if (cbUser.getSelectedItem().equals("Cliente"))
-                AppVariables.CLIENT_SERVICE.insert(userFields);
+                ControllerSingleton.CLIENT_SERVICE.insert(userFields);
             else
-                AppVariables.CLEANER_SERVICE.insert(userFields);
+                ControllerSingleton.CLEANER_SERVICE.insert(userFields);
 
-            var address = AppVariables.currentUser.getAddress();
-            AppVariables.CLIENT_SERVICE.updateData(new String[]{userFields[2], userFields[3]});
-            AppVariables.currentUser.setAddress(address);
+            var address = ControllerSingleton.currentUser.getAddress();
+            ControllerSingleton.CLIENT_SERVICE.updateData(new String[]{userFields[2], userFields[3]});
+            ControllerSingleton.currentUser.setAddress(address);
 
             clearFields();
             SwingUtilities.getWindowAncestor(rootPanel).dispose();
@@ -111,7 +111,7 @@ public class FormCreateUser {
     }
 
     public static void main(String[] args) {
-        AppVariables.currentUser = new Client("Cliente", true, new Date(), 00000000000, 00000000, null,
+        ControllerSingleton.currentUser = new Client("Cliente", true, new Date(), 00000000000, 00000000, null,
                 new Credentials(1, "teste", "teste"));
 
         JFrame frame = new JFrame();

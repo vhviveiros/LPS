@@ -6,15 +6,33 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public interface Dao<T extends Model> {
-    static final Connection CONNECTION = new Connection();
+    Connection CONNECTION = new Connection();
 
-    public void insert(T model) throws SQLException;
+    void insert(T model) throws SQLException;
 
-    public void remove(T model);
+    void remove(T model) throws SQLException;
 
-    public void alter(T oldValue, T newValue) throws SQLException;
+    void alter(T oldValue, T newValue) throws SQLException;
 
-    public T getItem(String[] args) throws SQLException;
+    T getItem(String[] args) throws SQLException;
 
-    public ArrayList<T> getList(String[] args) throws SQLException;
+    ArrayList<T> getList(String[] args) throws SQLException;
+
+    interface RunnableStmt {
+        void run(java.sql.Connection conn) throws SQLException;
+    }
+
+    /**
+     * Executa o sql statement, e em seguida fecha a conexão automaticamente
+     *
+     * @param stmt
+     * @throws SQLException
+     */
+    default void executeStmt(RunnableStmt stmt) throws SQLException {
+        try {
+            stmt.run(CONNECTION.getConnection());
+        } finally {
+            CONNECTION.disconnect();
+        }
+    }
 }

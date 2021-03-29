@@ -13,8 +13,8 @@ public class AddressController extends Controller<Address> {
 
     @Override
     public void insert(String[] args) throws InvalidInputException, SQLException {
-        AppVariables.currentUser = new Client(null, false, null, 00000000000, 00000000, null,
-                AppVariables.currentUser.getCredentials());
+        ControllerSingleton.currentUser = new Client(null, false, null, 00000000000, 00000000, null,
+                ControllerSingleton.currentUser.getCredentials());
 
         AddressValidation validation = new AddressValidation(args);
 
@@ -43,6 +43,6 @@ public class AddressController extends Controller<Address> {
 
     @Override
     public void updateData(String[] args) throws SQLException {
-        AppVariables.currentUser.setAddress(addressDao.getItem(args));
+        ControllerSingleton.currentUser.setAddress(addressDao.getItem(args));
     }
 }

@@ -2,7 +2,7 @@ package controller;
 
 import model.User;
 
-public class AppVariables {
+public class ControllerSingleton {
     public static User currentUser;
 
     public static final SupplyController SUPPLY_SERVICE = new SupplyController();

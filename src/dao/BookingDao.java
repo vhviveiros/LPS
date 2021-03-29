@@ -1,7 +1,7 @@
 package dao;
 
 import model.Booking;
-import controller.AppVariables;
+import controller.ControllerSingleton;
 
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -19,7 +19,7 @@ public class BookingDao implements Dao<Booking> {
         ps.setString(2, booking.getDetails());
         ps.setFloat(3, (float) booking.getPrice());
         ps.setDate(4, new Date(booking.getDate().getTime()));
-        ps.setInt(5, AppVariables.currentUser.getId());
+        ps.setInt(5, ControllerSingleton.currentUser.getId());
 
         ps.executeUpdate();
     }
@@ -52,7 +52,7 @@ public class BookingDao implements Dao<Booking> {
                     rs.getInt("id"),
                     rs.getString("title"),
                     rs.getString("details"),
-                    AppVariables.CLIENT_SERVICE.getItem(args),
+                    ControllerSingleton.CLIENT_SERVICE.getItem(args),
                     rs.getFloat("price"),
                     new java.util.Date(rs.getDate("date").getTime())
             ));

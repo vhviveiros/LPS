@@ -3,7 +3,7 @@ package view;
 import controller.SupplyTableModel;
 import etc.MaskFormatters;
 import model.Cleaner;
-import controller.AppVariables;
+import controller.ControllerSingleton;
 import etc.exception.invalid_input_exception.InvalidDateException;
 import etc.exception.invalid_input_exception.InvalidInputException;
 
@@ -41,7 +41,7 @@ public class FormSupplyManagement {
 
     private void insert() {
         try {
-            AppVariables.SUPPLY_SERVICE.insert(new String[]{
+            ControllerSingleton.SUPPLY_SERVICE.insert(new String[]{
                     edtName.getText(),
                     edtDetails.getText(),
                     edtAmount.getText(),
@@ -50,7 +50,7 @@ public class FormSupplyManagement {
 
             clearFields();
 
-            AppVariables.SUPPLY_SERVICE.updateData(new String[]{String.valueOf(AppVariables.currentUser.getId())});
+            ControllerSingleton.SUPPLY_SERVICE.updateData(new String[]{String.valueOf(ControllerSingleton.currentUser.getId())});
 
             ((AbstractTableModel) jtList.getModel()).fireTableDataChanged();
         } catch (InvalidInputException | SQLException e) {
@@ -71,7 +71,7 @@ public class FormSupplyManagement {
 
     private void createUIComponents() {
         try {
-            AppVariables.SUPPLY_SERVICE.updateData(new String[]{String.valueOf(AppVariables.currentUser.getId())});
+            ControllerSingleton.SUPPLY_SERVICE.updateData(new String[]{String.valueOf(ControllerSingleton.currentUser.getId())});
 
             jtList = new JTable(new SupplyTableModel());
             ftfPrice = new JFormattedTextField(MaskFormatters.moneyFormat());
@@ -86,7 +86,7 @@ public class FormSupplyManagement {
     }
 
     public static void main(String[] args) {
-        AppVariables.currentUser = new Cleaner(19, "teste", true, new Date(), 00000000000, 00000000, null, null);
+        ControllerSingleton.currentUser = new Cleaner(19, "teste", true, new Date(), 00000000000, 00000000, null, null);
 
         JFrame frame = new JFrame();
         frame.setContentPane(new FormSupplyManagement().rootPanel);

@@ -1,6 +1,6 @@
 package validation;
 
-import controller.AppVariables;
+import controller.ControllerSingleton;
 import etc.exception.invalid_input_exception.*;
 import model.Client;
 
@@ -31,10 +31,10 @@ public class BookingValidation extends Validation {
     }
 
     public Client clientValidation() throws InvalidUserExcepcion {
-        if (!(AppVariables.currentUser instanceof Client))
+        if (!(ControllerSingleton.currentUser instanceof Client))
             throw new InvalidUserExcepcion();
 
-        return (Client) AppVariables.currentUser;
+        return (Client) ControllerSingleton.currentUser;
     }
 
     public double priceValidation() throws InvalidPriceException {
