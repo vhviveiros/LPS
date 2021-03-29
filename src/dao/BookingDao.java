@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class BookingDao implements Dao<Booking> {
     @Override
     public void insert(Booking booking) throws SQLException {
-        PreparedStatement ps = AppVariables.CONNECTION.getConnection().prepareStatement(
+        PreparedStatement ps = CONNECTION.getConnection().prepareStatement(
                 "INSERT INTO tbl_booking (title,details,price,date,client_id) values (?,?,?,?,?)");
 
         ps.setString(1, booking.getTitle());
@@ -41,7 +41,7 @@ public class BookingDao implements Dao<Booking> {
 
     @Override
     public ArrayList<Booking> getList(String[] args) throws SQLException {
-        PreparedStatement ps = AppVariables.CONNECTION.getConnection().prepareStatement(
+        PreparedStatement ps = CONNECTION.getConnection().prepareStatement(
                 "SELECT * FROM tbl_booking WHERE client_id=" + args[0]);
         ResultSet rs = ps.executeQuery();
 

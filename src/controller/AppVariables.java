@@ -1,12 +1,9 @@
 package controller;
 
-import dao.Connection;
 import model.User;
 
 public class AppVariables {
     public static User currentUser;
-
-    public static final Connection CONNECTION = new Connection();
 
     public static final SupplyController SUPPLY_SERVICE = new SupplyController();
 

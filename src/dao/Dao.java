@@ -6,6 +6,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public interface Dao<T extends Model> {
+    static final Connection CONNECTION = new Connection();
+
     public void insert(T model) throws SQLException;
 
     public void remove(T model);

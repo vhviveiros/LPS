@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class AddressDao implements Dao<Address> {
     @Override
     public void insert(Address address) throws SQLException {
-        PreparedStatement ps = AppVariables.CONNECTION.getConnection().prepareStatement("INSERT INTO tbl_address " +
+        PreparedStatement ps = CONNECTION.getConnection().prepareStatement("INSERT INTO tbl_address " +
                 "(district,address,city,state,number) " +
                 "values (?,?,?,?,?)");
 
@@ -35,7 +35,7 @@ public class AddressDao implements Dao<Address> {
 
     @Override
     public Address getItem(String[] args) throws SQLException {
-        PreparedStatement ps = AppVariables.CONNECTION.getConnection().prepareStatement(
+        PreparedStatement ps = CONNECTION.getConnection().prepareStatement(
                 "SELECT * FROM tbl_address WHERE " +
                         "address=" + "\"" + args[0] + "\"" +
                         " && number=" + "\"" + args[1] + "\"" +

@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class SupplyDAO implements Dao<Supply> {
     @Override
     public void insert(Supply supply) throws SQLException {
-        PreparedStatement ps = AppVariables.CONNECTION.getConnection().prepareStatement(
+        PreparedStatement ps = CONNECTION.getConnection().prepareStatement(
                 "INSERT INTO tbl_supply (name,details,amount,expiration_date,price,cleaner_id) values (?,?,?,?,?,?)");
 
         ps.setString(1, supply.getName());
@@ -41,7 +41,7 @@ public class SupplyDAO implements Dao<Supply> {
 
     @Override
     public ArrayList<Supply> getList(String[] args) throws SQLException {
-        PreparedStatement ps = AppVariables.CONNECTION.getConnection().prepareStatement(
+        PreparedStatement ps = CONNECTION.getConnection().prepareStatement(
                 "SELECT * FROM tbl_supply WHERE cleaner_id=" + args[0]);
         ResultSet rs = ps.executeQuery();
 

@@ -15,7 +15,7 @@ public class ClientDao extends UserDao<Client> {
      */
     @Override
     public Client getItem(String[] args) throws SQLException {
-        PreparedStatement ps = AppVariables.CONNECTION.getConnection().prepareStatement(
+        PreparedStatement ps = CONNECTION.getConnection().prepareStatement(
                 "SELECT * FROM tbl_user WHERE cpf=" + "\"" + args[0] + "\"" + " && identity=" + "\"" + args[1] + "\"");
         ResultSet rs = ps.executeQuery();
 
