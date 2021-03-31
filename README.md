@@ -8,4 +8,4 @@
 >Obs.: O arquivo **.sql** que representa a estrutura do banco de dados se encontra na raíz do projeto.
 
 ## Estado do projeto
->Ainda faltam correções a serem realizadas no dia 31/03/2021.
+>Finalizado... Aguardando correção.
