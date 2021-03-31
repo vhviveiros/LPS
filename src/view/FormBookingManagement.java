@@ -12,6 +12,7 @@ import javax.swing.table.AbstractTableModel;
 import java.sql.SQLException;
 import java.util.Date;
 
+import static view.Tools.showConfirmDialog;
 import static view.Tools.showErrorDialog;
 
 public class FormBookingManagement {
@@ -40,11 +41,11 @@ public class FormBookingManagement {
     }
 
     private void alter() {
-        var result = JOptionPane.showConfirmDialog(null, "Deseja alterar os dados do item selecionado?");
+        var result = showConfirmDialog("Deseja alterar os dados do item selecionado?");
 
         if (result == JOptionPane.YES_OPTION) {
             try {
-                ControllerSingleton.BOOKING_SERVICE.alter(new String[]{
+                ControllerSingleton.BOOKING_CONTROLLER.alter(new String[]{
                         String.valueOf(currentSelection),
                         edtTitle.getText(),
                         edtDetails.getText(),
@@ -61,11 +62,11 @@ public class FormBookingManagement {
     }
 
     private void remove() {
-        var result = JOptionPane.showConfirmDialog(null, "Deseja remover permanentemente o item selecionado?");
+        var result = showConfirmDialog("Deseja remover permanentemente o item selecionado?");
 
         if (result == JOptionPane.YES_OPTION) {
             try {
-                ControllerSingleton.BOOKING_SERVICE.remove(new String[]{String.valueOf(currentSelection)});
+                ControllerSingleton.BOOKING_CONTROLLER.remove(new String[]{String.valueOf(currentSelection)});
                 clearFields();
                 updateTable();
             } catch (SQLException throwables) {
@@ -76,7 +77,7 @@ public class FormBookingManagement {
 
     private void insert() {
         try {
-            ControllerSingleton.BOOKING_SERVICE.insert(new String[]{
+            ControllerSingleton.BOOKING_CONTROLLER.insert(new String[]{
                     edtTitle.getText(),
                     edtDetails.getText(),
                     ftfPrice.getValue().toString(),
@@ -92,7 +93,7 @@ public class FormBookingManagement {
 
     private void updateTable() {
         try {
-            ControllerSingleton.BOOKING_SERVICE.updateData(new String[]{String.valueOf(ControllerSingleton.currentUser.getId())});
+            ControllerSingleton.BOOKING_CONTROLLER.updateData(new String[]{String.valueOf(ControllerSingleton.currentUser.getId())});
             if (jtList != null)
                 ((AbstractTableModel) jtList.getModel()).fireTableDataChanged();
         } catch (SQLException throwables) {
@@ -105,10 +106,10 @@ public class FormBookingManagement {
         edtDetails.setText("");
         ftfPrice.setValue(0.00);
         ftfDate.setValue("");
+        jtList.getSelectionModel().clearSelection();
     }
 
     private void createUIComponents() {
-        updateTable();
         jtList = new JTable(new BookingRegisterTableModel());
         jtList.getSelectionModel().addListSelectionListener(evt -> {
             currentSelection = jtList.getSelectedRow();
@@ -116,13 +117,14 @@ public class FormBookingManagement {
             if (currentSelection == -1)
                 return;
 
-            var selectedItem = ControllerSingleton.BOOKING_SERVICE.getData().get(currentSelection);
+            var selectedItem = ControllerSingleton.BOOKING_CONTROLLER.getData().get(currentSelection);
 
             edtTitle.setText(selectedItem.getTitle());
             edtDetails.setText(selectedItem.getDetails());
             ftfPrice.setValue(selectedItem.getPrice());
             ftfDate.setText(Formatters.dateToLocalString(selectedItem.getDate()));
         });
+        updateTable();
 
         ftfPrice = new JFormattedTextField(Formatters.moneyFormat());
         ftfPrice.setColumns(10);

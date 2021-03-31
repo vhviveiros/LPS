@@ -26,6 +26,8 @@ public abstract class Validation {
 
     protected Date nextDateValidation(String date) throws InvalidDateException {
         try {
+            if (date.equals("  /  /    "))
+                return null;
             String[] dateSplit = date.split("/");
             int dd = Integer.parseInt(dateSplit[0]);
             int mm = Integer.parseInt(dateSplit[1]);

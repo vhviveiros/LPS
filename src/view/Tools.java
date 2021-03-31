@@ -9,4 +9,10 @@ public class Tools {
                 message,
                 "Erro", JOptionPane.ERROR_MESSAGE);
     }
+
+    public static int showConfirmDialog(String message) {
+        return JOptionPane.showConfirmDialog(
+                null,
+                message);
+    }
 }

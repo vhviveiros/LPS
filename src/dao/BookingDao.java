@@ -82,7 +82,7 @@ public class BookingDao implements Dao<Booking> {
                         rs.getInt("id"),
                         rs.getString("title"),
                         rs.getString("details"),
-                        ControllerSingleton.CLIENT_SERVICE.getItem(args),
+                        ControllerSingleton.CLIENT_CONTROLLER.getItem(args),
                         rs.getFloat("price"),
                         new java.util.Date(rs.getDate("date").getTime())
                 ));

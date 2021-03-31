@@ -73,16 +73,16 @@ public class FormCreateUser {
                     edtDistrict.getText()
             };
 
-            ControllerSingleton.ADDRESS_SERVICE.insert(addressFields);
-            ControllerSingleton.ADDRESS_SERVICE.updateData(addressFields);
+            ControllerSingleton.ADDRESS_CONTROLLER.insert(addressFields);
+            ControllerSingleton.ADDRESS_CONTROLLER.updateData(addressFields);
 
             if (cbUser.getSelectedItem().equals("Cliente"))
-                ControllerSingleton.CLIENT_SERVICE.insert(userFields);
+                ControllerSingleton.CLIENT_CONTROLLER.insert(userFields);
             else
-                ControllerSingleton.CLEANER_SERVICE.insert(userFields);
+                ControllerSingleton.CLEANER_CONTROLLER.insert(userFields);
 
             var address = ControllerSingleton.currentUser.getAddress();
-            ControllerSingleton.CLIENT_SERVICE.updateData(new String[]{userFields[2], userFields[3]});
+            ControllerSingleton.CLIENT_CONTROLLER.updateData(new String[]{userFields[2], userFields[3]});
             ControllerSingleton.currentUser.setAddress(address);
 
             clearFields();

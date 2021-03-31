@@ -11,7 +11,7 @@ public class BookingRegisterTableModel extends AbstractTableModel {
 
     @Override
     public int getRowCount() {
-        return ControllerSingleton.BOOKING_SERVICE.getData().size();
+        return ControllerSingleton.BOOKING_CONTROLLER.getData().size();
     }
 
     @Override
@@ -26,7 +26,7 @@ public class BookingRegisterTableModel extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        Booking booking = ControllerSingleton.BOOKING_SERVICE.getData().get(rowIndex);
+        Booking booking = ControllerSingleton.BOOKING_CONTROLLER.getData().get(rowIndex);
         String price = "R$ " + String.format("%.2f", booking.getPrice());
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
         String date = simpleDateFormat.format(booking.getDate());

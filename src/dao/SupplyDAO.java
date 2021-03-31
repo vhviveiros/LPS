@@ -3,10 +3,7 @@ package dao;
 import controller.ControllerSingleton;
 import model.Supply;
 
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 
 public class SupplyDAO implements Dao<Supply> {
@@ -19,7 +16,10 @@ public class SupplyDAO implements Dao<Supply> {
             ps.setString(1, supply.getName());
             ps.setString(2, supply.getDetails());
             ps.setFloat(3, (float) supply.getAmount());
-            ps.setDate(4, new java.sql.Date(supply.getExpirationDate().getTime()));
+            if (supply.getExpirationDate() == null)
+                ps.setNull(4, Types.DATE);
+            else
+                ps.setDate(4, new java.sql.Date(supply.getExpirationDate().getTime()));
             ps.setFloat(5, (float) supply.getPrice());
             ps.setInt(6, ControllerSingleton.currentUser.getId());
 
@@ -44,13 +44,13 @@ public class SupplyDAO implements Dao<Supply> {
     public void alter(Supply oldValue, Supply newValue) throws SQLException {
         executeStmt(conn -> {
             PreparedStatement ps = conn.prepareStatement(
-                    "UPDATE tbl_address set " +
-                            "name = ?, " +
-                            "details = ?," +
-                            "amount = ?," +
-                            "expiration_date = ?," +
-                            "price = ?," +
-                            "WHERE id = ?");
+                    "UPDATE tbl_supply set " +
+                            "name=?, " +
+                            "details=?, " +
+                            "amount=?, " +
+                            "expiration_date=?, " +
+                            "price=? " +
+                            "WHERE id=?");
 
             ps.setString(1, newValue.getName());
             ps.setString(2, newValue.getDetails());
@@ -79,12 +79,14 @@ public class SupplyDAO implements Dao<Supply> {
             var returnValue = new ArrayList<Supply>();
 
             while (rs.next()) {
+                var date = rs.getDate("expiration_date");
+
                 returnValue.add(new Supply(
                         rs.getInt("id"),
                         rs.getString("name"),
                         rs.getString("details"),
                         rs.getFloat("amount"),
-                        new java.util.Date(rs.getDate("expiration_date").getTime()),
+                        date == null ? null : new java.util.Date(date.getTime()),
                         rs.getFloat("price")
                 ));
             }

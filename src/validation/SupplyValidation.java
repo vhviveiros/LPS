@@ -24,7 +24,7 @@ public class SupplyValidation extends Validation {
     }
 
     public String nameValidation() throws InvalidNameInputException {
-        if (ControllerSingleton.SUPPLY_SERVICE.getItem(new String[]{name}) != null)
+        if (ControllerSingleton.SUPPLY_CONTROLLER.getItem(new String[]{name}) != null)
             throw new InvalidNameInputException.ExistingNameException();
 
         return super.nameValidation(name);
@@ -34,9 +34,9 @@ public class SupplyValidation extends Validation {
         return details;
     }
 
-    public int amountValidation() throws InvalidQuantityException {
+    public double amountValidation() throws InvalidQuantityException {
         try {
-            int qtd = Integer.parseInt(amount);
+            double qtd = Double.parseDouble(amount);
 
             if (qtd < 1)
                 throw new InvalidQuantityException();

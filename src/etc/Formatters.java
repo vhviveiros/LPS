@@ -54,6 +54,9 @@ public class Formatters {
     }
 
     public static String dateToLocalString(Date date) {
+        if (date == null)
+            return "";
+
         DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         return formatter.format(date);
     }

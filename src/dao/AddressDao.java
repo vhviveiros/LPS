@@ -67,7 +67,7 @@ public class AddressDao implements Dao<Address> {
     @Override
     public Address getItem(String[] args) throws SQLException {
         return executeStmt(conn -> {
-            PreparedStatement ps = CONNECTION.getConnection().prepareStatement(
+            PreparedStatement ps = conn.prepareStatement(
                     "SELECT * FROM tbl_address WHERE " +
                             "address=" + "\"" + args[0] + "\"" +
                             " && number=" + "\"" + args[1] + "\"" +

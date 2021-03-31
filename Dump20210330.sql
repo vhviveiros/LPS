@@ -31,7 +31,7 @@ CREATE TABLE `tbl_address` (
   `number` int NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `unique` (`number`,`state`,`city`,`address`,`district`)
-) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=tis620 COLLATE=tis620_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=99 DEFAULT CHARSET=tis620 COLLATE=tis620_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -40,7 +40,7 @@ CREATE TABLE `tbl_address` (
 
 LOCK TABLES `tbl_address` WRITE;
 /*!40000 ALTER TABLE `tbl_address` DISABLE KEYS */;
-INSERT INTO `tbl_address` VALUES (50,'hriuyturtyu','rtyewrtrew','fdherytrwey','AC',123),(49,'tewtwetewtr','dsgwerteew','fdsgwrtwrt','AC',654);
+INSERT INTO `tbl_address` VALUES (50,'hriuyturtyu','rtyewrtrew','fdherytrwey','AC',123),(49,'tewtwetewtr','dsgwerteew','fdsgwrtwrt','AC',654),(51,'Novo Bairro','Rua Antonio Carlos','Antonio Carlos','MG',999);
 /*!40000 ALTER TABLE `tbl_address` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -60,7 +60,7 @@ CREATE TABLE `tbl_booking` (
   `client_id` int NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_tbl_booking_tbl_user1_idx` (`client_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=tis620 COLLATE=tis620_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=tis620 COLLATE=tis620_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -69,7 +69,7 @@ CREATE TABLE `tbl_booking` (
 
 LOCK TABLES `tbl_booking` WRITE;
 /*!40000 ALTER TABLE `tbl_booking` DISABLE KEYS */;
-INSERT INTO `tbl_booking` VALUES (1,'stgwret','wrrtwewt',0,'2021-08-22',19),(2,'teste 2','',5,'2021-06-22',19);
+INSERT INTO `tbl_booking` VALUES (1,'stgwret','wrrtwewt',0,'2021-08-22',19),(2,'teste 2','teste aaaa',5,'2022-06-22',19),(10,'teste 23','asgadf ad',15,'2022-06-22',19);
 /*!40000 ALTER TABLE `tbl_booking` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -86,7 +86,7 @@ CREATE TABLE `tbl_credentials` (
   `password` varchar(45) COLLATE tis620_bin NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username_UNIQUE` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=tis620 COLLATE=tis620_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=tis620 COLLATE=tis620_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -244,7 +244,7 @@ CREATE TABLE `tbl_supply` (
   `cleaner_id` int NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_tbl_supply_tbl_user1_idx` (`cleaner_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=tis620 COLLATE=tis620_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=tis620 COLLATE=tis620_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -253,7 +253,7 @@ CREATE TABLE `tbl_supply` (
 
 LOCK TABLES `tbl_supply` WRITE;
 /*!40000 ALTER TABLE `tbl_supply` DISABLE KEYS */;
-INSERT INTO `tbl_supply` VALUES (1,'teste','',231,'2021-08-22',0,19),(2,'aaaaaaaaaaaaaaaa','',132,'2021-08-22',0,19);
+INSERT INTO `tbl_supply` VALUES (1,'teste','',231,'2021-08-22',0,19),(2,'aaaaaaaaaaaaaaaa','',132,'2021-08-22',0,19),(3,'vassoura','',2,NULL,0,-1),(4,'vassoura','vassoura quebrada',2,'2025-08-22',0,21);
 /*!40000 ALTER TABLE `tbl_supply` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -275,11 +275,11 @@ CREATE TABLE `tbl_user` (
   `tbl_credentials_id` int NOT NULL,
   `tbl_address_id` int NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `identity_UNIQUE` (`identity`),
-  UNIQUE KEY `cpf_UNIQUE` (`cpf`),
+  UNIQUE KEY `identity_UNIQUE` (`identity`,`user_type`),
+  UNIQUE KEY `cpf_UNIQUE` (`cpf`,`user_type`),
   KEY `fk_tbl_user_tbl_credentials_idx` (`tbl_credentials_id`),
   KEY `fk_tbl_user_tbl_address1_idx` (`tbl_address_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=tis620 COLLATE=tis620_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=69 DEFAULT CHARSET=tis620 COLLATE=tis620_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -288,7 +288,7 @@ CREATE TABLE `tbl_user` (
 
 LOCK TABLES `tbl_user` WRITE;
 /*!40000 ALTER TABLE `tbl_user` DISABLE KEYS */;
-INSERT INTO `tbl_user` VALUES (19,'asgsarf','1996-08-22',1,65487867468,89765416,0,1,49),(20,'dfyertrewt','1996-08-31',1,54687987987,56465666,0,1,50);
+INSERT INTO `tbl_user` VALUES (19,'asgsarf','1996-08-22',1,65487867468,89765416,0,1,49),(20,'dfyertrewt','1996-08-31',1,54687987987,56465666,0,1,50),(21,'Faxineiro','2021-03-31',1,0,0,0,9999,9999);
 /*!40000 ALTER TABLE `tbl_user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -301,4 +301,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-03-30 19:26:13
+-- Dump completed on 2021-03-31 17:39:37
