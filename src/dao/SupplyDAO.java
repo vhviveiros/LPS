@@ -55,7 +55,10 @@ public class SupplyDAO implements Dao<Supply> {
             ps.setString(1, newValue.getName());
             ps.setString(2, newValue.getDetails());
             ps.setFloat(3, (float) newValue.getAmount());
-            ps.setDate(4, new java.sql.Date(newValue.getExpirationDate().getTime()));
+            if (newValue.getExpirationDate() == null)
+                ps.setNull(4, Types.DATE);
+            else
+                ps.setDate(4, new java.sql.Date(newValue.getExpirationDate().getTime()));
             ps.setFloat(5, (float) newValue.getPrice());
             ps.setInt(6, newValue.getId());
 

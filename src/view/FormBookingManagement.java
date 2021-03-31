@@ -1,6 +1,7 @@
 package view;
 
 import controller.tableModels.BookingRegisterTableModel;
+import etc.DataMock;
 import etc.Formatters;
 import etc.exception.invalid_input_exception.InvalidDateException;
 import controller.ControllerSingleton;
@@ -139,7 +140,7 @@ public class FormBookingManagement {
     }
 
     public static void main(String[] args) {
-        ControllerSingleton.currentUser = new Client(19, "teste", true, new Date(), 00000000000, 00000000, null, null);
+        DataMock.mockClient();
 
         JFrame frame = new JFrame();
         frame.setContentPane(new FormBookingManagement().rootPanel);

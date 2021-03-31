@@ -42,6 +42,11 @@ public class BookingValidation extends Validation {
     }
 
     public Date dateValidation() throws InvalidDateException {
-        return super.nextDateValidation(date);
+        var result = super.nextDateValidation(date);
+
+        if (result == null)
+            throw new InvalidDateException();
+
+        return result;
     }
 }
