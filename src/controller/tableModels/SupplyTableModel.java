@@ -1,5 +1,6 @@
-package controller;
+package controller.tableModels;
 
+import controller.ControllerSingleton;
 import model.Supply;
 
 import javax.swing.table.AbstractTableModel;

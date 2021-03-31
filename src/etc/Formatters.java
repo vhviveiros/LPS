@@ -6,11 +6,14 @@ import etc.exception.invalid_input_exception.InvalididentityException;
 
 import javax.swing.text.MaskFormatter;
 import javax.swing.text.NumberFormatter;
+import java.text.DateFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Locale;
 
-public class MaskFormatters {
+public class Formatters {
     public static NumberFormatter moneyFormat() {
         NumberFormat format = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
         format.setMaximumFractionDigits(2);
@@ -48,5 +51,10 @@ public class MaskFormatters {
         } catch (ParseException e) {
             throw new InvalidDateException();
         }
+    }
+
+    public static String dateToLocalString(Date date) {
+        DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        return formatter.format(date);
     }
 }

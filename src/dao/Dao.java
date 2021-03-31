@@ -18,8 +18,8 @@ public interface Dao<T extends Model> {
 
     ArrayList<T> getList(String[] args) throws SQLException;
 
-    interface RunnableStmt {
-        void run(java.sql.Connection conn) throws SQLException;
+    interface RunnableStmt<T> {
+        T run(java.sql.Connection conn) throws SQLException;
     }
 
     /**
@@ -28,9 +28,9 @@ public interface Dao<T extends Model> {
      * @param stmt
      * @throws SQLException
      */
-    default void executeStmt(RunnableStmt stmt) throws SQLException {
+    default <S> S executeStmt(RunnableStmt<S> stmt) throws SQLException {
         try {
-            stmt.run(CONNECTION.getConnection());
+            return stmt.run(CONNECTION.getConnection());
         } finally {
             CONNECTION.disconnect();
         }

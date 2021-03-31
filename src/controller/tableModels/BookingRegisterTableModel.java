@@ -1,12 +1,13 @@
-package controller;
+package controller.tableModels;
 
+import controller.ControllerSingleton;
 import model.Booking;
 
 import javax.swing.table.AbstractTableModel;
 import java.text.SimpleDateFormat;
 
 public class BookingRegisterTableModel extends AbstractTableModel {
-    private final String[] columnNames = {"Nome", "Usuário", "Preço", "Data Reserva"};
+    private final String[] columnNames = {"Nome", "Preço", "Data Reserva"};
 
     @Override
     public int getRowCount() {
@@ -15,7 +16,7 @@ public class BookingRegisterTableModel extends AbstractTableModel {
 
     @Override
     public int getColumnCount() {
-        return 4;
+        return 3;
     }
 
     @Override
@@ -30,8 +31,7 @@ public class BookingRegisterTableModel extends AbstractTableModel {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
         String date = simpleDateFormat.format(booking.getDate());
 
-        var result = new Object[]{booking.getTitle(), booking.getClient(),
-                price, date};
+        var result = new Object[]{booking.getTitle(), price, date};
         return result[columnIndex];
     }
 }

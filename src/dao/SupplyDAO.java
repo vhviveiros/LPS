@@ -3,6 +3,7 @@ package dao;
 import controller.ControllerSingleton;
 import model.Supply;
 
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,27 +12,56 @@ import java.util.ArrayList;
 public class SupplyDAO implements Dao<Supply> {
     @Override
     public void insert(Supply supply) throws SQLException {
-        PreparedStatement ps = CONNECTION.getConnection().prepareStatement(
-                "INSERT INTO tbl_supply (name,details,amount,expiration_date,price,cleaner_id) values (?,?,?,?,?,?)");
+        executeStmt(conn -> {
+            PreparedStatement ps = conn.prepareStatement(
+                    "INSERT INTO tbl_supply (name,details,amount,expiration_date,price,cleaner_id) values (?,?,?,?,?,?)");
 
-        ps.setString(1, supply.getName());
-        ps.setString(2, supply.getDetails());
-        ps.setFloat(3, (float) supply.getAmount());
-        ps.setDate(4, new java.sql.Date(supply.getExpirationDate().getTime()));
-        ps.setFloat(5, (float) supply.getPrice());
-        ps.setInt(6, ControllerSingleton.currentUser.getId());
+            ps.setString(1, supply.getName());
+            ps.setString(2, supply.getDetails());
+            ps.setFloat(3, (float) supply.getAmount());
+            ps.setDate(4, new java.sql.Date(supply.getExpirationDate().getTime()));
+            ps.setFloat(5, (float) supply.getPrice());
+            ps.setInt(6, ControllerSingleton.currentUser.getId());
 
-        ps.executeUpdate();
+            ps.executeUpdate();
+            return null;
+        });
     }
 
     @Override
-    public void remove(Supply supply) {
+    public void remove(Supply supply) throws SQLException {
+        executeStmt(conn -> {
+            PreparedStatement ps = conn.prepareStatement(
+                    "DELETE FROM tbl_supply WHERE id = ?");
+            ps.setInt(1, supply.getId());
 
+            ps.executeUpdate();
+            return null;
+        });
     }
 
     @Override
-    public void alter(Supply oldValue, Supply newValue) {
+    public void alter(Supply oldValue, Supply newValue) throws SQLException {
+        executeStmt(conn -> {
+            PreparedStatement ps = conn.prepareStatement(
+                    "UPDATE tbl_address set " +
+                            "name = ?, " +
+                            "details = ?," +
+                            "amount = ?," +
+                            "expiration_date = ?," +
+                            "price = ?," +
+                            "WHERE id = ?");
 
+            ps.setString(1, newValue.getName());
+            ps.setString(2, newValue.getDetails());
+            ps.setFloat(3, (float) newValue.getAmount());
+            ps.setDate(4, new java.sql.Date(newValue.getExpirationDate().getTime()));
+            ps.setFloat(5, (float) newValue.getPrice());
+            ps.setInt(6, newValue.getId());
+
+            ps.executeUpdate();
+            return null;
+        });
     }
 
     @Override
@@ -41,24 +71,25 @@ public class SupplyDAO implements Dao<Supply> {
 
     @Override
     public ArrayList<Supply> getList(String[] args) throws SQLException {
-        PreparedStatement ps = CONNECTION.getConnection().prepareStatement(
-                "SELECT * FROM tbl_supply WHERE cleaner_id=" + args[0]);
-        ResultSet rs = ps.executeQuery();
+        return executeStmt(conn -> {
+            PreparedStatement ps = conn.prepareStatement(
+                    "SELECT * FROM tbl_supply WHERE cleaner_id=" + args[0]);
+            ResultSet rs = ps.executeQuery();
 
-        var returnValue = new ArrayList<Supply>();
+            var returnValue = new ArrayList<Supply>();
 
-        while (rs.next()) {
-            returnValue.add(new Supply(
-                    rs.getInt("id"),
-                    rs.getString("name"),
-                    rs.getString("details"),
-                    rs.getFloat("amount"),
-                    new java.util.Date(rs.getDate("expiration_date").getTime()),
-                    rs.getFloat("price")
-            ));
-        }
+            while (rs.next()) {
+                returnValue.add(new Supply(
+                        rs.getInt("id"),
+                        rs.getString("name"),
+                        rs.getString("details"),
+                        rs.getFloat("amount"),
+                        new java.util.Date(rs.getDate("expiration_date").getTime()),
+                        rs.getFloat("price")
+                ));
+            }
 
-        return returnValue;
+            return returnValue;
+        });
     }
-
 }

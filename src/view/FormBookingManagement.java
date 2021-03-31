@@ -1,7 +1,7 @@
 package view;
 
-import controller.BookingRegisterTableModel;
-import etc.MaskFormatters;
+import controller.tableModels.BookingRegisterTableModel;
+import etc.Formatters;
 import etc.exception.invalid_input_exception.InvalidDateException;
 import controller.ControllerSingleton;
 import etc.exception.invalid_input_exception.InvalidInputException;
@@ -27,15 +27,51 @@ public class FormBookingManagement {
     private JFormattedTextField ftfPrice;
     private JTable jtList;
     private JFormattedTextField ftfDate;
+    private int currentSelection = -1;
 
     public FormBookingManagement() {
-        btnCancel.addActionListener(e -> {
-            clearFields();
-        });
+        btnCancel.addActionListener(e -> clearFields());
 
-        btnAdd.addActionListener(e -> {
-            insert();
-        });
+        btnAdd.addActionListener(e -> insert());
+
+        btnAlter.addActionListener(e -> alter());
+
+        btnRemove.addActionListener(e -> remove());
+    }
+
+    private void alter() {
+        var result = JOptionPane.showConfirmDialog(null, "Deseja alterar os dados do item selecionado?");
+
+        if (result == JOptionPane.YES_OPTION) {
+            try {
+                ControllerSingleton.BOOKING_SERVICE.alter(new String[]{
+                        String.valueOf(currentSelection),
+                        edtTitle.getText(),
+                        edtDetails.getText(),
+                        String.valueOf(ftfPrice.getValue()),
+                        ftfDate.getText()
+                });
+
+                clearFields();
+                updateTable();
+            } catch (Exception e) {
+                showErrorDialog(e.getMessage());
+            }
+        }
+    }
+
+    private void remove() {
+        var result = JOptionPane.showConfirmDialog(null, "Deseja remover permanentemente o item selecionado?");
+
+        if (result == JOptionPane.YES_OPTION) {
+            try {
+                ControllerSingleton.BOOKING_SERVICE.remove(new String[]{String.valueOf(currentSelection)});
+                clearFields();
+                updateTable();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+        }
     }
 
     private void insert() {
@@ -74,12 +110,26 @@ public class FormBookingManagement {
     private void createUIComponents() {
         updateTable();
         jtList = new JTable(new BookingRegisterTableModel());
-        ftfPrice = new JFormattedTextField(MaskFormatters.moneyFormat());
+        jtList.getSelectionModel().addListSelectionListener(evt -> {
+            currentSelection = jtList.getSelectedRow();
+
+            if (currentSelection == -1)
+                return;
+
+            var selectedItem = ControllerSingleton.BOOKING_SERVICE.getData().get(currentSelection);
+
+            edtTitle.setText(selectedItem.getTitle());
+            edtDetails.setText(selectedItem.getDetails());
+            ftfPrice.setValue(selectedItem.getPrice());
+            ftfDate.setText(Formatters.dateToLocalString(selectedItem.getDate()));
+        });
+
+        ftfPrice = new JFormattedTextField(Formatters.moneyFormat());
         ftfPrice.setColumns(10);
         ftfPrice.setValue(0.00);
 
         try {
-            ftfDate = new JFormattedTextField(MaskFormatters.dateFormat());
+            ftfDate = new JFormattedTextField(Formatters.dateFormat());
         } catch (InvalidDateException e) {
             e.printStackTrace();
             showErrorDialog(e.getMessage());

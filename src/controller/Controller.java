@@ -1,6 +1,9 @@
 package controller;
 
+import etc.exception.invalid_input_exception.InvalidDescriptionException;
 import etc.exception.invalid_input_exception.InvalidInputException;
+import etc.exception.invalid_input_exception.InvalidNameInputException;
+import etc.exception.invalid_input_exception.InvalidUserExcepcion;
 import model.Model;
 
 import java.sql.SQLException;
@@ -11,9 +14,9 @@ public abstract class Controller<T extends Model> {
 
     public abstract void insert(String[] args) throws InvalidInputException, SQLException;
 
-    public abstract void alter(String[] args);
+    public abstract void alter(String[] args) throws InvalidNameInputException, InvalidDescriptionException.LongDescriptionException, InvalidUserExcepcion, SQLException, InvalidInputException;
 
-    public abstract void remove(String[] args);
+    public abstract void remove(String[] args) throws SQLException;
 
     public abstract T getItem(String[] args);
 

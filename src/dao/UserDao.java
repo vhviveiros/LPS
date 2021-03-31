@@ -24,6 +24,7 @@ public abstract class UserDao<T extends User> implements Dao<T> {
             ps.setInt(8, user.getAddress().getId());
 
             ps.executeUpdate();
+            return null;
         });
     }
 
@@ -35,6 +36,7 @@ public abstract class UserDao<T extends User> implements Dao<T> {
             ps.setInt(1, user.getId());
 
             ps.executeUpdate();
+            return null;
         });
         //logout
     }
@@ -65,6 +67,7 @@ public abstract class UserDao<T extends User> implements Dao<T> {
             ps.setInt(9, oldValue.getId());
 
             ps.executeUpdate();
+            return null;
         });
     }
 

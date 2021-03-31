@@ -14,20 +14,22 @@ public class CleanerDao extends UserDao<Cleaner> {
      */
     @Override
     public Cleaner getItem(String[] args) throws SQLException {
-        PreparedStatement ps = CONNECTION.getConnection().prepareStatement(
-                "SELECT FIRST FROM tbl_address WHERE cpf="+ "\"" + args[0]+ "\"" + "&& identity="+ "\"" + args[1]+ "\"");
-        ResultSet rs = ps.executeQuery();
+        return executeStmt(conn -> {
+            PreparedStatement ps = conn.prepareStatement(
+                    "SELECT FIRST FROM tbl_address WHERE cpf=" + "\"" + args[0] + "\"" + "&& identity=" + "\"" + args[1] + "\"");
+            ResultSet rs = ps.executeQuery();
 
-        return new Cleaner(
-                rs.getInt("id"),
-                rs.getString("name"),
-                rs.getBoolean("gender"),
-                new java.util.Date(rs.getDate("birthdate").getTime()),
-                rs.getLong("cpf"),
-                rs.getLong("identity"),
-                ControllerSingleton.ADDRESS_SERVICE.getItem(args),
-                ControllerSingleton.CREDENTIALS_SERVICE.getItem(args)
-        );
+            return new Cleaner(
+                    rs.getInt("id"),
+                    rs.getString("name"),
+                    rs.getBoolean("gender"),
+                    new java.util.Date(rs.getDate("birthdate").getTime()),
+                    rs.getLong("cpf"),
+                    rs.getLong("identity"),
+                    ControllerSingleton.ADDRESS_SERVICE.getItem(args),
+                    ControllerSingleton.CREDENTIALS_SERVICE.getItem(args)
+            );
+        });
     }
 
     @Override

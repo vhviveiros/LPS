@@ -1,6 +1,6 @@
 package view;
 
-import etc.MaskFormatters;
+import etc.Formatters;
 import etc.exception.invalid_input_exception.InvalidCpfInputException;
 import etc.exception.invalid_input_exception.InvalidDateException;
 import etc.exception.invalid_input_exception.InvalidInputException;
@@ -101,9 +101,9 @@ public class FormCreateUser {
         cbGender = new JComboBox<>(new String[]{"Masculino", "Feminino"});
 
         try {
-            ftfBirthDay = new JFormattedTextField(MaskFormatters.dateFormat());
-            ftfCpf = new JFormattedTextField(MaskFormatters.cpfFormat());
-            ftfIdentity = new JFormattedTextField(MaskFormatters.identidadeFormat());
+            ftfBirthDay = new JFormattedTextField(Formatters.dateFormat());
+            ftfCpf = new JFormattedTextField(Formatters.cpfFormat());
+            ftfIdentity = new JFormattedTextField(Formatters.identidadeFormat());
 
         } catch (InvalidDateException | InvalidCpfInputException | InvalididentityException e) {
             showErrorDialog(e.getMessage());

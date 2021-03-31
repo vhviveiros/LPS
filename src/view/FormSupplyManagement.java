@@ -1,7 +1,7 @@
 package view;
 
-import controller.SupplyTableModel;
-import etc.MaskFormatters;
+import controller.tableModels.SupplyTableModel;
+import etc.Formatters;
 import model.Cleaner;
 import controller.ControllerSingleton;
 import etc.exception.invalid_input_exception.InvalidDateException;
@@ -74,11 +74,11 @@ public class FormSupplyManagement {
             ControllerSingleton.SUPPLY_SERVICE.updateData(new String[]{String.valueOf(ControllerSingleton.currentUser.getId())});
 
             jtList = new JTable(new SupplyTableModel());
-            ftfPrice = new JFormattedTextField(MaskFormatters.moneyFormat());
+            ftfPrice = new JFormattedTextField(Formatters.moneyFormat());
             ftfPrice.setColumns(10);
             ftfPrice.setValue(0.00);
 
-            ftfExpirationDate = new JFormattedTextField(MaskFormatters.dateFormat());
+            ftfExpirationDate = new JFormattedTextField(Formatters.dateFormat());
         } catch (InvalidDateException | SQLException e) {
             e.printStackTrace();
             showErrorDialog(e.getMessage());
