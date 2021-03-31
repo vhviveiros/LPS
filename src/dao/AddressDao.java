@@ -69,11 +69,18 @@ public class AddressDao implements Dao<Address> {
         return executeStmt(conn -> {
             PreparedStatement ps = conn.prepareStatement(
                     "SELECT * FROM tbl_address WHERE " +
-                            "address=" + "\"" + args[0] + "\"" +
-                            " && number=" + "\"" + args[1] + "\"" +
-                            " && city=" + "\"" + args[2] + "\"" +
-                            " && state=" + "\"" + args[3] + "\"" +
-                            " && district=" + "\"" + args[4] + "\"");
+                            "address=?" +
+                            " && number=?" +
+                            " && city=?" +
+                            " && state=?" +
+                            " && district=?");
+
+            ps.setString(1, args[0]);
+            ps.setString(2, args[1]);
+            ps.setString(3, args[2]);
+            ps.setString(4, args[3]);
+            ps.setString(5, args[4]);
+
             ResultSet rs = ps.executeQuery();
 
             if (rs.next())

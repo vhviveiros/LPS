@@ -1,5 +1,6 @@
 package view;
 
+import etc.DataMock;
 import etc.Formatters;
 import etc.exception.invalid_input_exception.InvalidCpfInputException;
 import etc.exception.invalid_input_exception.InvalidDateException;
@@ -9,6 +10,7 @@ import model.Address;
 import model.Client;
 import model.Credentials;
 import controller.ControllerSingleton;
+import model.User;
 
 import javax.swing.*;
 
@@ -34,13 +36,9 @@ public class FormCreateUser {
     private JComboBox cbGender;
 
     public FormCreateUser() {
-        btnCancel.addActionListener(e -> {
-            clearFields();
-        });
+        btnCancel.addActionListener(e -> clearFields());
 
-        btnAdd.addActionListener(e -> {
-            insert();
-        });
+        btnAdd.addActionListener(e -> insert());
     }
 
     private void clearFields() {
@@ -73,8 +71,13 @@ public class FormCreateUser {
                     edtDistrict.getText()
             };
 
+            ControllerSingleton.currentUser = new Client("Cliente", true, new Date(), 00000000000, 00000000, null,
+                    null);
+
             ControllerSingleton.ADDRESS_CONTROLLER.insert(addressFields);
             ControllerSingleton.ADDRESS_CONTROLLER.updateData(addressFields);
+
+            ControllerSingleton.currentUser.setCredentials(DataMock.mockCredentials());
 
             if (cbUser.getSelectedItem().equals("Cliente"))
                 ControllerSingleton.CLIENT_CONTROLLER.insert(userFields);
@@ -111,9 +114,6 @@ public class FormCreateUser {
     }
 
     public static void main(String[] args) {
-        ControllerSingleton.currentUser = new Client("Cliente", true, new Date(), 00000000000, 00000000, null,
-                new Credentials(1, "teste", "teste"));
-
         JFrame frame = new JFrame();
         frame.setContentPane(new FormCreateUser().rootPanel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
