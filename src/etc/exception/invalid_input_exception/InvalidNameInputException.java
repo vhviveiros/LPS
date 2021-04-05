@@ -17,12 +17,6 @@ public abstract class InvalidNameInputException extends InvalidInputException {
         }
     }
 
-    public static class ExistingNameException extends InvalidNameInputException {
-        public ExistingNameException() {
-            super("O nome informado já foi cadastrado!");
-        }
-    }
-
     public static class InvalidCharactersException extends InvalidNameInputException {
         public InvalidCharactersException() {
             super("O nome informado possui caracteres inválidos! Utilize apenas letras e números!");

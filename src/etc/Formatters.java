@@ -2,7 +2,7 @@ package etc;
 
 import etc.exception.invalid_input_exception.InvalidCpfInputException;
 import etc.exception.invalid_input_exception.InvalidDateException;
-import etc.exception.invalid_input_exception.InvalididentityException;
+import etc.exception.invalid_input_exception.InvalidIdentityException;
 
 import javax.swing.text.MaskFormatter;
 import javax.swing.text.NumberFormatter;
@@ -37,11 +37,11 @@ public class Formatters {
         }
     }
 
-    public static MaskFormatter identidadeFormat() throws InvalididentityException {
+    public static MaskFormatter identidadeFormat() throws InvalidIdentityException {
         try {
             return new MaskFormatter("##.###.###");
         } catch (ParseException e) {
-            throw new InvalididentityException();
+            throw new InvalidIdentityException();
         }
     }
 

@@ -5,12 +5,11 @@ import etc.Formatters;
 import etc.exception.invalid_input_exception.InvalidCpfInputException;
 import etc.exception.invalid_input_exception.InvalidDateException;
 import etc.exception.invalid_input_exception.InvalidInputException;
-import etc.exception.invalid_input_exception.InvalididentityException;
+import etc.exception.invalid_input_exception.InvalidIdentityException;
 import model.Address;
 import model.Client;
-import model.Credentials;
 import controller.ControllerSingleton;
-import model.User;
+import validation.UserValidation;
 
 import javax.swing.*;
 
@@ -74,6 +73,8 @@ public class FormCreateUser {
             ControllerSingleton.currentUser = new Client("Cliente", true, new Date(), 00000000000, 00000000, null,
                     null);
 
+            new UserValidation(userFields).validate(); //Lança exceção em caso de campo inválido
+
             ControllerSingleton.ADDRESS_CONTROLLER.insert(addressFields);
             ControllerSingleton.ADDRESS_CONTROLLER.updateData(addressFields);
 
@@ -108,7 +109,7 @@ public class FormCreateUser {
             ftfCpf = new JFormattedTextField(Formatters.cpfFormat());
             ftfIdentity = new JFormattedTextField(Formatters.identidadeFormat());
 
-        } catch (InvalidDateException | InvalidCpfInputException | InvalididentityException e) {
+        } catch (InvalidDateException | InvalidCpfInputException | InvalidIdentityException e) {
             showErrorDialog(e.getMessage());
         }
     }

@@ -1,6 +1,7 @@
 package controller;
 
 import dao.ClientDao;
+import etc.exception.invalid_input_exception.ExistingUserException;
 import etc.exception.invalid_input_exception.InvalidInputException;
 import model.Client;
 import validation.UserValidation;
@@ -16,14 +17,20 @@ public class ClientController extends Controller<Client> {
 
         boolean gender = args[4].equals("Masculino");
 
-        clientDao.insert(new Client(
-                validation.nameValidation(),
-                gender,
-                validation.birthDateValidation(),
-                validation.cpfValidation(),
-                validation.identityValidation(),
-                ControllerSingleton.currentUser.getAddress(),
-                ControllerSingleton.currentUser.getCredentials()));
+        try {
+            clientDao.insert(new Client(
+                    validation.nameValidation(),
+                    gender,
+                    validation.birthDateValidation(),
+                    validation.cpfValidation(),
+                    validation.identityValidation(),
+                    ControllerSingleton.currentUser.getAddress(),
+                    ControllerSingleton.currentUser.getCredentials()));
+        } catch (SQLException e) {
+            if (e.getMessage().contains("Duplicate"))
+                throw new ExistingUserException();
+            throw e;
+        }
     }
 
     @Override

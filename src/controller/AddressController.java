@@ -1,6 +1,7 @@
 package controller;
 
 import dao.AddressDao;
+import etc.exception.invalid_input_exception.ExistingAddressException;
 import etc.exception.invalid_input_exception.InvalidInputException;
 import model.Address;
 import model.Client;
@@ -18,12 +19,18 @@ public class AddressController extends Controller<Address> {
 
         AddressValidation validation = new AddressValidation(args);
 
-        addressDao.insert(new Address(
-                validation.addressValidation(),
-                validation.numberValidation(),
-                validation.cidadeValidation(),
-                validation.estadoValidation(),
-                validation.bairroValidation()));
+        try {
+            addressDao.insert(new Address(
+                    validation.addressValidation(),
+                    validation.numberValidation(),
+                    validation.cidadeValidation(),
+                    validation.estadoValidation(),
+                    validation.bairroValidation()));
+        } catch (SQLException e) {
+            if (e.getMessage().contains("Duplicate"))
+                throw new ExistingAddressException();
+            throw e;
+        }
     }
 
     @Override

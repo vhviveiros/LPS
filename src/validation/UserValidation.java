@@ -1,9 +1,7 @@
 package validation;
 
-import etc.exception.invalid_input_exception.InvalidCpfInputException;
-import etc.exception.invalid_input_exception.InvalidDateException;
-import etc.exception.invalid_input_exception.InvalidNameInputException;
-import etc.exception.invalid_input_exception.InvalididentityException;
+import etc.exception.invalid_input_exception.*;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -59,13 +57,20 @@ public class UserValidation extends Validation {
         }
     }
 
-    public long identityValidation() throws InvalididentityException {
+    public long identityValidation() throws InvalidIdentityException {
         if (identity == null || identity.length() != 8)
-            throw new InvalididentityException();
+            throw new InvalidIdentityException();
         try {
             return Long.parseLong(identity);
         } catch (NumberFormatException e) {
-            throw new InvalididentityException();
+            throw new InvalidIdentityException();
         }
+    }
+
+    public void validate() throws InvalidInputException {
+        nameValidation();
+        birthDateValidation();
+        cpfValidation();
+        identityValidation();
     }
 }

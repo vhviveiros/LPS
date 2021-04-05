@@ -1,6 +1,7 @@
 package controller;
 
 import dao.CleanerDao;
+import etc.exception.invalid_input_exception.ExistingUserException;
 import etc.exception.invalid_input_exception.InvalidInputException;
 import model.Cleaner;
 import validation.UserValidation;
@@ -16,14 +17,20 @@ public class CleanerController extends Controller<Cleaner> {
 
         boolean gender = args[4].equals("Masculino");
 
-        cleanerDao.insert(new Cleaner(
-                validation.nameValidation(),
-                gender,
-                validation.birthDateValidation(),
-                validation.cpfValidation(),
-                validation.identityValidation(),
-                ControllerSingleton.currentUser.getAddress(),
-                ControllerSingleton.currentUser.getCredentials()));
+        try {
+            cleanerDao.insert(new Cleaner(
+                    validation.nameValidation(),
+                    gender,
+                    validation.birthDateValidation(),
+                    validation.cpfValidation(),
+                    validation.identityValidation(),
+                    ControllerSingleton.currentUser.getAddress(),
+                    ControllerSingleton.currentUser.getCredentials()));
+        } catch (SQLException e) {
+            if (e.getMessage().contains("Duplicate"))
+                throw new ExistingUserException();
+            throw e;
+        }
     }
 
     @Override
