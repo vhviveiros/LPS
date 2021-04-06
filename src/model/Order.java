@@ -7,21 +7,21 @@ public class Order extends Model{
     private String details;
     //Pagamento pagamento;
     private ArrayList<Supply> usedSupplies;
-    private Client client;
+    private Cleaner cleaner;
     private Booking booking;
 
-    public Order(int id, String details, ArrayList<Supply> usedSupplies, Client client, Booking booking) {
+    public Order(int id, String details, ArrayList<Supply> usedSupplies, Cleaner cleaner, Booking booking) {
         super(id);
         this.details = details;
         this.usedSupplies = usedSupplies;
-        this.client = client;
+        this.cleaner = cleaner;
         this.booking = booking;
     }
 
-    public Order(String details, ArrayList<Supply> usedSupplies, Client client, Booking booking) {
+    public Order(String details, ArrayList<Supply> usedSupplies, Cleaner cleaner, Booking booking) {
         this.details = details;
         this.usedSupplies = usedSupplies;
-        this.client = client;
+        this.cleaner = cleaner;
         this.booking = booking;
     }
 
@@ -41,12 +41,12 @@ public class Order extends Model{
         this.usedSupplies = usedSupplies;
     }
 
-    public Client getCliente() {
-        return client;
+    public Cleaner getCleanere() {
+        return cleaner;
     }
 
-    public void setCliente(Client client) {
-        this.client = client;
+    public void setCleanere(Cleaner cleaner) {
+        this.cleaner = cleaner;
     }
 
     public Booking getBooking() {

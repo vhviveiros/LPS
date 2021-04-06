@@ -11,6 +11,12 @@ public abstract class InvalidNameInputException extends InvalidInputException {
         }
     }
 
+    public static class ExistingNameException extends InvalidNameInputException {
+        public ExistingNameException() {
+            super("O nome informado já foi cadastrado!");
+        }
+    }
+
     public static class ShortNameException extends InvalidNameInputException {
         public ShortNameException() {
             super("O nome informado é muito curto!");
