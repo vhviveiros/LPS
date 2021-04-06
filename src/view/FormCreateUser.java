@@ -70,9 +70,6 @@ public class FormCreateUser {
                     edtDistrict.getText()
             };
 
-            ControllerSingleton.currentUser = new Client("Cliente", true, new Date(), 00000000000, 00000000, null,
-                    null);
-
             new UserValidation(userFields).validate(); //Lança exceção em caso de campo inválido
 
             ControllerSingleton.ADDRESS_CONTROLLER.insert(addressFields);
